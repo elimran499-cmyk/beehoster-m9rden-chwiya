@@ -266,7 +266,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
               screen but can't blow past 5rem on a wide phone or shrink to
               nothing on a 320px one — and there's no size cliff at `sm`. */}
           <h1 className="relative z-10 font-display uppercase text-white leading-[0.88] tracking-tight text-[clamp(3.5rem,17vw,5.5rem)] lg:text-[5rem] xl:text-[5.8rem]">
-            <span className="block drop-shadow-[0_6px_28px_rgba(0,0,0,0.9)]">20.000+</span>
+            <span className="block drop-shadow-[0_6px_28px_rgba(0,0,0,0.9)]">80.000+</span>
             <span className="block accent-gradient-text drop-shadow-[0_6px_28px_rgba(0,0,0,0.55)]">Zenders</span>
           </h1>
 
@@ -309,7 +309,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
               film wall. */}
           <div className="mt-8 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] py-4 lg:max-w-md">
             {[
-              { value: '20.000+', label: 'Zenders' },
+              { value: '80.000+', label: 'Zenders' },
               { value: '200.000+', label: 'Films & series' },
               { value: '99,99%', label: 'Uptime' },
             ].map((stat) => (

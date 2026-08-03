@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenOrderModal }) => {
             </a>
 
             <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
-              BEEHOSTER is een IPTV-aanbieder met 20.000+ live tv-zenders in 4K UHD, sportuitzendingen en video-on-demand, draaiend op Anti-Freeze™ 9.0-servers wereldwijd.
+              BEEHOSTER is een IPTV-aanbieder met 80.000+ live tv-zenders in 4K UHD, sportuitzendingen en video-on-demand, draaiend op Anti-Freeze™ 9.0-servers wereldwijd.
             </p>
 
             <div className="flex items-center gap-2 text-xs font-semibold text-zinc-300">
@@ -70,6 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenOrderModal }) => {
               <li><a href="#channels" className="hover:text-[#FFD166] transition-colors">Zenders & VOD</a></li>
               <li><a href="#features" className="hover:text-[#FFD166] transition-colors">Waarom BEEHOSTER</a></li>
               <li><a href="#pricing" className="hover:text-[#FFD166] transition-colors">Abonnementen</a></li>
+              <li><a href="#blog" className="hover:text-[#FFD166] transition-colors">Blog</a></li>
               <li><a href="#faq" className="hover:text-[#FFD166] transition-colors">FAQ & support</a></li>
             </ul>
           </div>

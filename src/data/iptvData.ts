@@ -12,7 +12,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     popular: true,
     tagline: 'Populairste keuze voor het sportseizoen',
     features: [
-      '20.000+ live zenders',
+      '80.000+ live zenders',
       '95.000+ films & series',
       '4K & 60FPS Ultra HD-kwaliteit',
       '99,9% Anti-Freeze 9.0 uptime',
@@ -35,7 +35,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     savePercent: 45,
     tagline: 'Flink voordeel voor langer kijkplezier',
     features: [
-      '20.000+ live zenders',
+      '80.000+ live zenders',
       '95.000+ films & series',
       '4K & 60FPS Ultra HD-kwaliteit',
       '99,9% Anti-Freeze 9.0 uptime',
@@ -60,7 +60,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     bestValue: true,
     tagline: 'Beste prijs! Maximaal voordeel, gegarandeerd zonder buffering',
     features: [
-      '20.000+ live zenders',
+      '80.000+ live zenders',
       '95.000+ films & series',
       '4K & 60FPS Ultra HD-kwaliteit',
       '99,9% Anti-Freeze 9.0 uptime',
@@ -259,7 +259,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: 'faq-4',
     category: 'Zenders & VOD',
     question: 'Kan ik zenders aanvragen of adult-zenders beveiligen?',
-    answer: 'Ja! Je krijgt toegang tot 20.000+ live zenders en 95.000+ films en series. Adult-zenders zijn optioneel — geef in de chat aan of je ze wilt, en ze zijn te vergrendelen met een pincode. Mis je een zender die je graag kijkt? Vraag het en we kijken of we hem kunnen toevoegen.'
+    answer: 'Ja! Je krijgt toegang tot 80.000+ live zenders en 95.000+ films en series. Adult-zenders zijn optioneel — geef in de chat aan of je ze wilt, en ze zijn te vergrendelen met een pincode. Mis je een zender die je graag kijkt? Vraag het en we kijken of we hem kunnen toevoegen.'
   },
   {
     id: 'faq-5',

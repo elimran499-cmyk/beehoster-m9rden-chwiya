@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Tag, Sparkles, HelpCircle, ChevronLeft, ChevronRight, MonitorSmartphone, Tv } from 'lucide-react';
+import { Home, Tag, Sparkles, HelpCircle, ChevronLeft, ChevronRight, MonitorSmartphone, Tv, BookOpen } from 'lucide-react';
 import { BeehosterLogo, BeeGlyph } from './BeehosterLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { whatsAppLink } from '../data/contact';
@@ -14,6 +14,7 @@ const navLinks = [
   { name: 'Prijzen', href: '#pricing', id: 'pricing', icon: Tag },
   { name: 'Apparaten', href: '#devices', id: 'devices', icon: MonitorSmartphone },
   { name: 'Voordelen', href: '#features', id: 'features', icon: Sparkles },
+  { name: 'Blog', href: '#blog', id: 'blog', icon: BookOpen },
   { name: 'FAQ', href: '#faq', id: 'faq', icon: HelpCircle },
 ];
 
@@ -121,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <nav
           aria-label="Sectiemenu"
           aria-hidden={scrolled}
-          className={`max-w-full flex items-center gap-0.5 sm:gap-1 p-1 rounded-full glass-card glass-edge shadow-[0_18px_40px_-22px_rgba(0,0,0,1)] overflow-x-auto no-scrollbar transition-all duration-500 ease-out sm:absolute sm:right-4 lg:right-8 sm:top-4 ${
+          className={`hidden sm:flex max-w-full items-center gap-1 p-1 rounded-full glass-card glass-edge shadow-[0_18px_40px_-22px_rgba(0,0,0,1)] overflow-x-auto no-scrollbar transition-all duration-500 ease-out sm:absolute sm:right-4 lg:right-8 sm:top-4 ${
             scrolled ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'
           }`}
         >
@@ -231,7 +232,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
     >
       <div
         className={`flex flex-col gap-1 p-2 rounded-[2rem] glass-card glass-edge shadow-[0_30px_60px_-25px_rgba(0,0,0,1)] transition-[width] duration-300 ease-out ${
-          expanded ? 'w-[13.5rem]' : 'w-[3.75rem]'
+          expanded ? 'w-[15rem]' : 'w-[3.75rem]'
         }`}
       >
         {/* Brand + collapse control */}
@@ -270,7 +271,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
               key={link.name}
               href={link.href}
               onClick={() => setExpanded(false)}
-              title={link.name}
               aria-current={active ? 'true' : undefined}
               className={`flex items-center gap-2.5 rounded-full p-1 transition-colors duration-200 ${
                 active ? 'bg-white text-black shadow-lg shadow-black/30' : 'text-zinc-300 hover:bg-white/10'
@@ -295,7 +295,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
           href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag meer weten over jullie IPTV-abonnementen.')}
           target="_blank"
           rel="noopener noreferrer"
-          title="Chat via WhatsApp"
           className="flex items-center gap-2.5 rounded-full p-1 text-zinc-300 hover:bg-white/10 transition-colors"
         >
           <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] flex items-center justify-center shrink-0">
@@ -307,7 +306,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <a
           href="#pricing"
           onClick={() => setExpanded(false)}
-          title="Abonnement nemen"
           className="flex items-center gap-2.5 rounded-full p-1 text-black accent-button-gradient shadow-lg shadow-[#FF5C3A]/25 hover:scale-[1.02] transition-transform"
         >
           <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/10 flex items-center justify-center shrink-0">

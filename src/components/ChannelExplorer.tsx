@@ -85,7 +85,7 @@ export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderMod
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs font-bold text-[#FFD166] uppercase tracking-widest bg-[#FF5C3A]/10 px-3.5 py-1 rounded-full border border-[#FF5C3A]/30">
-            20.000+ LIVE ZENDERS & 95.000+ VOD
+            80.000+ LIVE ZENDERS & 95.000+ VOD
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             Ontdek ons <span className="accent-gradient-text">complete zender- en film</span>aanbod

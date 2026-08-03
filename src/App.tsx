@@ -7,6 +7,7 @@ import { ChannelExplorer } from './components/ChannelExplorer';
 import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
 import { Testimonials } from './components/Testimonials';
+import { Blog } from './components/Blog';
 import { FaqSection } from './components/FaqSection';
 import { OrderModal } from './components/OrderModal';
 import { Footer } from './components/Footer';
@@ -60,6 +61,9 @@ export default function App() {
 
         {/* Verified Testimonials */}
         <Testimonials />
+
+        {/* Blog — internal links into the static article pages */}
+        <Blog />
 
         {/* FAQ Accordion Section */}
         <FaqSection onOpenOrderModal={handleOpenOrderModal} />
