@@ -185,10 +185,13 @@
      stop stays heavy and the backdrop blur is strong, so headings behind it
      dissolve into colour instead of reading through as text. */
   .brand-plate {
+    /* Glass look, not glass transparency. The warm gradient and the rim light
+       do the work; every stop stays near-opaque because backdrop-filter can't
+       be relied on here — headings were reading straight through the pill. */
     background: linear-gradient(158deg,
-      rgba(255, 154, 46, 0.24) 0%,
-      rgba(255, 92, 58, 0.13) 42%,
-      rgba(27, 10, 19, 0.86) 100%);
+      rgba(94, 40, 22, 0.97) 0%,
+      rgba(56, 22, 34, 0.98) 46%,
+      rgba(24, 9, 17, 0.99) 100%);
     backdrop-filter: blur(26px) saturate(165%);
     -webkit-backdrop-filter: blur(26px) saturate(165%);
     border: 1px solid rgba(255, 190, 120, 0.55);
