@@ -353,8 +353,23 @@
   animation: bee-drift 7s ease-in-out infinite;
 }
 
+/* A wider loop for the bees circling the wordmark — they should look like
+   they're flying around it, not resting on it. */
+@keyframes bee-fly {
+  0%   { transform: translate(0, 0) rotate(10deg); }
+  20%  { transform: translate(9px, -7px) rotate(-8deg); }
+  45%  { transform: translate(3px, -13px) rotate(12deg); }
+  70%  { transform: translate(-9px, -6px) rotate(-6deg); }
+  100% { transform: translate(0, 0) rotate(10deg); }
+}
+
+.animate-bee-fly {
+  animation: bee-fly 6.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-bee { animation: none; }
+  .animate-bee,
+  .animate-bee-fly { animation: none; }
 }
 
 @keyframes marquee {

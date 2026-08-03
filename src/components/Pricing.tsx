@@ -59,16 +59,6 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenOrderModal }) => {
         }`}
       />
 
-      {/* Oversized Background Wordmark — the cards crop into it */}
-      <div
-        aria-hidden="true"
-        className="absolute top-40 sm:top-44 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none"
-      >
-        <span className="block font-display uppercase text-[22vw] sm:text-[17vw] leading-none tracking-tighter text-white/[0.07] sm:text-white/[0.09]">
-          Prijzen
-        </span>
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}

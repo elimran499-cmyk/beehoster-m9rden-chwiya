@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Home, Tag, Sparkles, HelpCircle, ChevronLeft, ChevronRight, MonitorSmartphone, Tv } from 'lucide-react';
-import { BeehosterLogo } from './BeehosterLogo';
+import { BeehosterLogo, BeeGlyph } from './BeehosterLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { whatsAppLink } from '../data/contact';
 
@@ -85,6 +85,21 @@ export const Navbar: React.FC<NavbarProps> = () => {
             scrolled ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'
           }`}
         >
+          {/* Bees circling the wordmark */}
+          <BeeGlyph
+            aria-hidden="true"
+            className="absolute -top-2.5 -right-1.5 w-4 h-4 text-[#FFE600] drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '1.8s' }}
+            className="absolute -bottom-2 right-9 w-3 h-3 text-[#FFD166]/85 drop-shadow-[0_2px_5px_rgba(0,0,0,0.7)] animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '3.4s' }}
+            className="absolute -top-3 left-10 w-2.5 h-2.5 text-[#FFE600]/70 animate-bee-fly pointer-events-none"
+          />
           <BeehosterLogo className="w-10 h-10 shrink-0" />
           <span className="text-base font-black tracking-wide text-white leading-none">
             <span className="text-[#FFE600]">BEE</span>HOSTER
@@ -119,6 +134,21 @@ export const Navbar: React.FC<NavbarProps> = () => {
             scrolled ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
           }`}
         >
+          {/* Bees circling the wordmark */}
+          <BeeGlyph
+            aria-hidden="true"
+            className="absolute -top-2.5 -right-1.5 w-4 h-4 text-[#FFE600] drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '1.8s' }}
+            className="absolute -bottom-2 right-9 w-3 h-3 text-[#FFD166]/85 drop-shadow-[0_2px_5px_rgba(0,0,0,0.7)] animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '3.4s' }}
+            className="absolute -top-3 left-10 w-2.5 h-2.5 text-[#FFE600]/70 animate-bee-fly pointer-events-none"
+          />
           <BeehosterLogo className="w-9 h-9 sm:w-10 sm:h-10 shrink-0" />
           <span className="text-sm sm:text-base font-black tracking-wide text-white leading-none">
             <span className="text-[#FFE600]">BEE</span>HOSTER

@@ -155,39 +155,6 @@ const PosterRail: React.FC<{
   );
 };
 
-/* Library counter that fades in under the films, holds, then leaves — the two
-   figures alternate forever. */
-const LibraryCounter: React.FC<{ className?: string }> = ({ className = '' }) => {
-  const stats = [
-    { value: '+200.000', label: 'Films' },
-    { value: '+80.000', label: 'Zenders' },
-  ];
-
-  return (
-    /* Backing plate: the figures sit over poster artwork, and white-on-busy
-       was unreadable half the time. */
-    <div
-      className={`h-[5.5rem] w-56 rounded-3xl bg-black/45 backdrop-blur-md border border-white/10 ${className}`}
-      aria-hidden="true"
-    >
-      {stats.map((stat, i) => (
-        <div
-          key={stat.value}
-          className="absolute inset-0 flex flex-col items-center justify-center animate-stat-cycle"
-          style={{ animationDelay: `${i * 5.5}s` }}
-        >
-          <span className="font-display text-[2.6rem] leading-none tracking-tight accent-gradient-text">
-            {stat.value}
-          </span>
-          <span className="mt-1.5 font-condensed uppercase text-[10px] tracking-[0.34em] text-zinc-400">
-            {stat.label}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 /* A seamlessly looping column of posters (list rendered twice for the -50% loop). */
 const PosterColumn: React.FC<{ items: FilmCard[]; direction: 'up' | 'down'; duration: string; className?: string }> = ({
   items,
@@ -276,37 +243,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#14070F]/60 via-transparent to-[#14070F]/60 pointer-events-none" />
       </div>
 
-      {/* ══ GIANT VERTICAL LETTERING ══════════════════════════════ */}
-      {/* Sized off viewport *height*, not width — the string runs vertically, so
-          a vw-based size sliced the number in half on anything but a very tall
-          window. Centred on the first screenful so it's whole on arrival. */}
-      <div
-        aria-hidden="true"
-        className="hidden lg:flex absolute top-0 h-[100svh] max-h-full left-[47%] xl:left-[48%] z-[24] flex-col justify-center pointer-events-none select-none outline-glow"
-      >
-        <span className="font-display text-outline-hero text-[clamp(2.25rem,7vh,4.25rem)] leading-none tracking-tight whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
-          200.000+ films
-        </span>
-      </div>
-
-      {/* Library counter, under the films */}
-      <LibraryCounter className="hidden lg:flex absolute bottom-[9%] right-[14%] xl:right-[16%] z-[10] pointer-events-none" />
-
-      {/* ── LEFT: Rotated Masthead Rail ───────────────────────────── */}
-      <div className="hidden lg:flex absolute left-7 inset-y-0 z-30 items-center pointer-events-none">
-        <div className="flex items-start gap-3">
-          <div className="w-px h-40 bg-white/40 mt-1" />
-          <div className="flex items-center gap-5 [writing-mode:vertical-rl] rotate-180">
-            <h2 className="font-condensed font-bold uppercase text-3xl tracking-tight text-white">
-              Beehoster <span className="text-[#FF5C3A]">Cinema</span>
-            </h2>
-            <p className="font-editorial text-[13px] leading-snug text-zinc-400 max-h-64">
-              Meer dan live televisie: een manier van kijken — 200.000+ films en series, geremasterd in 4K.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* ── LEFT: Editorial Copy Block ────────────────────────────── */}
       <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Phones read this as an editorial page, not a centred template: one
@@ -349,10 +285,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
           </div>
 
           {/* Masthead Headline */}
-          <p className="font-condensed uppercase text-[10px] sm:text-sm tracking-[0.3em] sm:tracking-[0.45em] text-[#FFD166] mb-3.5">
-            Editie 09 — Premium IPTV
-          </p>
-
           {/* Two stacked lines, same treatment on every screen. The line-height
               stays at 0.92 so the Anton ascenders can't ride up into the
               kicker above them. */}
