@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <a
           href="#hero"
           aria-hidden={scrolled}
-          className={`hidden sm:flex absolute left-4 lg:left-8 top-3 sm:top-4 items-center gap-2.5 px-4 py-2 rounded-full brand-plate transition-all duration-500 ease-out ${
+          className={`flex absolute left-1/2 -translate-x-1/2 sm:left-4 sm:translate-x-0 lg:left-8 top-3 sm:top-4 items-center gap-2.5 px-4 py-2 rounded-full brand-plate transition-all duration-500 ease-out ${
             scrolled ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'
           }`}
         >
@@ -122,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <nav
           aria-label="Sectiemenu"
           aria-hidden={scrolled}
-          className={`hidden sm:flex max-w-full items-center gap-1 p-1 rounded-full glass-card glass-edge shadow-[0_18px_40px_-22px_rgba(0,0,0,1)] overflow-x-auto no-scrollbar transition-all duration-500 ease-out sm:absolute sm:right-4 lg:right-8 sm:top-4 ${
+          className={`hidden sm:flex max-w-full items-center gap-1 p-1 rounded-full menu-glass overflow-x-auto no-scrollbar transition-all duration-500 ease-out sm:absolute sm:right-4 lg:right-8 sm:top-4 ${
             scrolled ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'
           }`}
         >
@@ -186,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
       className="sm:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1.5rem)]"
       aria-label="Hoofdnavigatie"
     >
-      <div className="flex items-center gap-1 p-1.5 rounded-full glass-card glass-edge shadow-[0_20px_45px_-20px_rgba(0,0,0,1)] overflow-x-auto no-scrollbar">
+      <div className="flex items-center gap-1 p-1.5 rounded-full menu-glass overflow-x-auto no-scrollbar">
         {navLinks
           .map((link) => {
             const Icon = link.icon;
@@ -231,7 +231,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
       aria-label="Hoofdnavigatie"
     >
       <div
-        className={`flex flex-col gap-1 p-2 rounded-[2rem] glass-card glass-edge shadow-[0_30px_60px_-25px_rgba(0,0,0,1)] transition-[width] duration-300 ease-out ${
+        className={`flex flex-col gap-1 p-2 rounded-[2rem] menu-glass transition-[width] duration-300 ease-out ${
           expanded ? 'w-[15rem]' : 'w-[3.75rem]'
         }`}
       >
