@@ -303,26 +303,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
             </a>
           </div>
 
-        </div>
+          {/* Spec strip — every screen now, since the vertical "200.000+ films"
+              lettering that used to carry the catalogue size on desktop is
+              gone. It sits inside the copy column so it stays clear of the
+              film wall. */}
+          <div className="mt-8 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] py-4 lg:max-w-md">
+            {[
+              { value: '20.000+', label: 'Zenders' },
+              { value: '200.000+', label: 'Films & series' },
+              { value: '99,99%', label: 'Uptime' },
+            ].map((stat) => (
+              <div key={stat.label} className="px-2 text-center">
+                <p className="font-display text-[1.35rem] lg:text-[1.6rem] leading-none tracking-tight accent-gradient-text">
+                  {stat.value}
+                </p>
+                <p className="mt-1.5 font-condensed uppercase text-[9px] tracking-[0.2em] text-zinc-400">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
 
-        {/* ── MOBILE: the numbers phones never got. Desktop carries them in the
-               giant vertical lettering and the library counter; this is the
-               small-screen stand-in, set as a spec strip. ──────────────── */}
-        <div className="lg:hidden mt-8 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] py-4">
-          {[
-            { value: '20.000+', label: 'Zenders' },
-            { value: '200.000+', label: 'Films & series' },
-            { value: '99,99%', label: 'Uptime' },
-          ].map((stat) => (
-            <div key={stat.label} className="px-2 text-center">
-              <p className="font-display text-[1.35rem] leading-none tracking-tight accent-gradient-text">
-                {stat.value}
-              </p>
-              <p className="mt-1.5 font-condensed uppercase text-[9px] tracking-[0.2em] text-zinc-400">
-                {stat.label}
-              </p>
-            </div>
-          ))}
         </div>
 
         {/* ── MOBILE: full-bleed catalogue rails ───────────────────── */}
