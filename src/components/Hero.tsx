@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Star, CheckCircle2, Sparkles, BadgeCheck } from 'lucide-react';
+import { Play, Sparkles, BadgeCheck } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { whatsAppLink } from '../data/contact';
 
@@ -249,32 +249,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
             hard left edge that the kicker, masthead, rule and buttons all
             share. */}
         <div className="text-left lg:w-[46%] lg:pl-20">
-          {/* Status Ribbon — one bar rather than two pills that wrap into a
-              ragged second line on narrow phones. */}
-          <div className="inline-flex items-center gap-2.5 sm:gap-3 px-3.5 py-2 rounded-full glass-card glass-edge mb-5">
-            <span className="flex items-center gap-2">
-              <span className="flex h-2 w-2 relative shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-semibold text-zinc-200 whitespace-nowrap">
-                <span className="hidden sm:inline">Anti-Freeze 9.0 · </span>99,99% online
-              </span>
-            </span>
-
-            <span className="h-3.5 w-px bg-white/20 shrink-0" />
-
-            <span className="flex items-center gap-1.5">
-              <span className="flex items-center text-[#FFD166]">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#FFD166]" />
-                ))}
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-bold text-white whitespace-nowrap">4.9</span>
-              <span className="text-[10px] sm:text-[11px] text-zinc-400">Trustpilot</span>
-            </span>
-          </div>
-
           {/* Official-site marker. Clones and resellers are the norm in this
               market, so the badge names the one channel we actually answer on. */}
           <div className="inline-flex items-center gap-2.5 mb-4 px-3 py-1.5 rounded-full border border-[#FFE600]/45 bg-[#FFE600]/10">
@@ -291,30 +265,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
           {/* clamp() instead of a raw vw size: the type keeps growing with the
               screen but can't blow past 5rem on a wide phone or shrink to
               nothing on a 320px one — and there's no size cliff at `sm`. */}
-          <h1 className="relative z-10 font-display uppercase text-white leading-[0.88] tracking-tight text-[clamp(3.25rem,16.5vw,5rem)] lg:text-[4.4rem] xl:text-[5.2rem]">
+          <h1 className="relative z-10 font-display uppercase text-white leading-[0.88] tracking-tight text-[clamp(3.5rem,17vw,5.5rem)] lg:text-[5rem] xl:text-[5.8rem]">
             <span className="block drop-shadow-[0_6px_28px_rgba(0,0,0,0.9)]">20.000+</span>
             <span className="block accent-gradient-text drop-shadow-[0_6px_28px_rgba(0,0,0,0.55)]">Zenders</span>
-
-            {/* The rule runs out from the strapline to the column edge — it ties
-                the line to the masthead instead of leaving it floating. */}
-            <span className="flex items-center gap-3.5 mt-3.5 lg:mt-2">
-              <span className="font-condensed font-semibold text-lg sm:text-3xl lg:text-4xl tracking-[0.3em] lg:tracking-wide text-zinc-300 whitespace-nowrap">
-                In 4K UHD
-              </span>
-              <span className="h-px flex-1 bg-gradient-to-r from-[#FF5C3A]/70 to-transparent lg:hidden" />
-            </span>
           </h1>
 
           {/* Serif Standfirst */}
           {/* Same accent rule on every screen — it's the one indent in the
               column, so it reads as a standfirst rather than a stray line. */}
-          <p className="mt-5 sm:mt-6 font-editorial text-[15px] sm:text-lg leading-relaxed text-zinc-300 max-w-md border-l border-[#FF5C3A]/40 pl-4 lg:pl-5">
+          <p className="mt-6 sm:mt-7 font-editorial text-base sm:text-xl leading-relaxed text-zinc-300 max-w-lg border-l border-[#FF5C3A]/40 pl-4 lg:pl-5">
             Geen buffering, Anti-Freeze™ 9.0-servertechnologie en activatie binnen 5 minuten op Firestick, smart-tv,
             Android en iOS. Alle sport, film &amp; PPV inbegrepen.
           </p>
 
           {/* Action CTAs */}
-          <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <a
               href="#pricing"
               className="px-5 sm:px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-bold text-black accent-button-gradient rounded-full shadow-xl shadow-[#FF5C3A]/25 hover:shadow-[#FF5C3A]/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
@@ -338,17 +303,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
             </a>
           </div>
 
-          {/* Trust Highlights — a contained panel on phones so the four points
-              land as one reassurance block instead of four loose lines; back to
-              a plain inline row from sm up. */}
-          <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-[11px] text-zinc-300 sm:mt-7 sm:flex sm:flex-wrap sm:items-center sm:gap-x-6 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:text-xs sm:text-zinc-400">
-            {['Binnen 5 min actief', '7 dagen geld terug', 'Geen contract', '24/7 WhatsApp-hulp'].map((item) => (
-              <div key={item} className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0 text-[#FF5C3A]" />
-                <span className="leading-tight">{item}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ── MOBILE: the numbers phones never got. Desktop carries them in the

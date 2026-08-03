@@ -100,6 +100,16 @@ export const Navbar: React.FC<NavbarProps> = () => {
             style={{ animationDelay: '3.4s' }}
             className="absolute -top-3 left-10 w-2.5 h-2.5 text-[#FFE600]/70 animate-bee-fly pointer-events-none"
           />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '2.6s' }}
+            className="absolute -bottom-2.5 left-6 w-3 h-3 text-[#FFE600]/60 animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '4.6s' }}
+            className="absolute -top-2 right-16 w-2.5 h-2.5 text-[#FFD166]/55 animate-bee-fly pointer-events-none"
+          />
           <BeehosterLogo className="w-10 h-10 shrink-0" />
           <span className="text-base font-black tracking-wide text-white leading-none">
             <span className="text-[#FFE600]">BEE</span>HOSTER
@@ -148,6 +158,16 @@ export const Navbar: React.FC<NavbarProps> = () => {
             aria-hidden="true"
             style={{ animationDelay: '3.4s' }}
             className="absolute -top-3 left-10 w-2.5 h-2.5 text-[#FFE600]/70 animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '2.6s' }}
+            className="absolute -bottom-2.5 left-6 w-3 h-3 text-[#FFE600]/60 animate-bee-fly pointer-events-none"
+          />
+          <BeeGlyph
+            aria-hidden="true"
+            style={{ animationDelay: '4.6s' }}
+            className="absolute -top-2 right-16 w-2.5 h-2.5 text-[#FFD166]/55 animate-bee-fly pointer-events-none"
           />
           <BeehosterLogo className="w-9 h-9 sm:w-10 sm:h-10 shrink-0" />
           <span className="text-sm sm:text-base font-black tracking-wide text-white leading-none">

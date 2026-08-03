@@ -188,10 +188,13 @@
     /* Glass look, not glass transparency. The warm gradient and the rim light
        do the work; every stop stays near-opaque because backdrop-filter can't
        be relied on here — headings were reading straight through the pill. */
-    background: linear-gradient(158deg,
-      rgba(94, 40, 22, 0.97) 0%,
-      rgba(56, 22, 34, 0.98) 46%,
-      rgba(24, 9, 17, 0.99) 100%);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='40' viewBox='0 0 34 40'%3E%3Cg fill='none' stroke='%23FFD9A0' stroke-opacity='0.16' stroke-width='1.1'%3E%3Cpath d='M17 1 L32 9.5 L32 26.5 L17 35 L2 26.5 L2 9.5 Z'/%3E%3Cpath d='M0 -19 L15 -10.5 L15 6.5 L0 15 L-15 6.5 L-15 -10.5 Z'/%3E%3Cpath d='M34 -19 L49 -10.5 L49 6.5 L34 15 L19 6.5 L19 -10.5 Z'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(158deg,
+        rgba(94, 40, 22, 0.97) 0%,
+        rgba(56, 22, 34, 0.98) 46%,
+        rgba(24, 9, 17, 0.99) 100%);
+    background-size: 34px 40px, auto;
     backdrop-filter: blur(26px) saturate(165%);
     -webkit-backdrop-filter: blur(26px) saturate(165%);
     border: 1px solid rgba(255, 190, 120, 0.55);
