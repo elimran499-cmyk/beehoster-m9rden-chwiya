@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <a
           href="#hero"
           aria-hidden={scrolled}
-          className={`hidden sm:flex absolute left-4 lg:left-8 top-3 sm:top-4 items-center gap-2.5 px-4 py-2 rounded-full glass-card glass-edge shadow-[0_18px_40px_-22px_rgba(0,0,0,1)] transition-all duration-500 ease-out ${
+          className={`hidden sm:flex absolute left-4 lg:left-8 top-3 sm:top-4 items-center gap-2.5 px-4 py-2 rounded-full bg-[#1B0A13] border border-[#FF5C3A]/30 shadow-[0_18px_40px_-18px_rgba(0,0,0,1)] transition-all duration-500 ease-out ${
             scrolled ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0 pointer-events-auto'
           }`}
         >
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <a
           href="#hero"
           aria-hidden={!scrolled}
-          className={`absolute left-1/2 -translate-x-1/2 top-3 sm:top-4 flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full glass-card glass-edge shadow-[0_18px_40px_-22px_rgba(0,0,0,1)] transition-all duration-500 ease-out ${
+          className={`absolute left-1/2 -translate-x-1/2 top-3 sm:top-4 flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-[#1B0A13] border border-[#FF5C3A]/30 shadow-[0_18px_40px_-18px_rgba(0,0,0,1)] transition-all duration-500 ease-out ${
             scrolled ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
           }`}
         >
