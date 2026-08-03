@@ -20,7 +20,7 @@ const navLinks = [
 /* Floating vertical rail. Collapsed it's a column of icons; expanded it grows
    labels out to the right. The active section rides a white pill, so the rail
    doubles as a position indicator while you scroll. */
-export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
+export const Navbar: React.FC<NavbarProps> = () => {
   const [expanded, setExpanded] = useState(false);
   const [activeId, setActiveId] = useState<string>('hero');
   const [scrolled, setScrolled] = useState(false);
@@ -254,11 +254,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
           {expanded && <span className="text-sm font-semibold truncate pr-2">WhatsApp</span>}
         </a>
 
-        <button
-          onClick={() => {
-            setExpanded(false);
-            onOpenOrderModal('plan-12m');
-          }}
+        <a
+          href="#pricing"
+          onClick={() => setExpanded(false)}
           title="Abonnement nemen"
           className="flex items-center gap-2.5 rounded-full p-1 text-black accent-button-gradient shadow-lg shadow-[#FF5C3A]/25 hover:scale-[1.02] transition-transform"
         >
@@ -266,7 +264,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
             <Sparkles className="w-4 h-4 fill-black" />
           </span>
           {expanded && <span className="text-sm font-bold truncate pr-2">Abonnement nemen</span>}
-        </button>
+        </a>
 
         {/* Expand affordance — only shown while collapsed */}
         {!expanded && (

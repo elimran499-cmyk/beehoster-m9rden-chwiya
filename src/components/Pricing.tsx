@@ -289,7 +289,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenOrderModal }) => {
                   }`}
                 >
                   <WhatsAppIcon className={`w-4 h-4 ${isVip ? 'text-[#0E5B2A]' : 'text-[#25D366]'}`} />
-                  {isVip ? 'Word nu VIP' : 'Nu bestellen'}
+                  {isVip ? 'Word VIP Nu' : 'Bestel Nu'}
                 </button>
 
                 <div className="my-6 h-px bg-white/10" />

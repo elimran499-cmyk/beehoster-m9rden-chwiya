@@ -383,8 +383,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
 
           {/* Action CTAs */}
           <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button
-              onClick={() => onOpenOrderModal('plan-12m')}
+            <a
+              href="#pricing"
               className="px-5 sm:px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-bold text-black accent-button-gradient rounded-full shadow-xl shadow-[#FF5C3A]/25 hover:shadow-[#FF5C3A]/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
             >
               <Sparkles className="w-4.5 h-4.5 shrink-0 fill-black group-hover:rotate-12 transition-transform" />
@@ -393,7 +393,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
               <span className="shrink-0 bg-black/20 px-1.5 sm:px-2 py-0.5 rounded-lg text-[9px] sm:text-[10px] tracking-wider uppercase font-extrabold">
                 Bespaar 55%
               </span>
-            </button>
+            </a>
 
             <a
               href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag een IPTV-abonnement bestellen.')}
