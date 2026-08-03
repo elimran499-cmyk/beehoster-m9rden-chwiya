@@ -1,0 +1,469 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .bg-pitch-black {
+    background-color: #14070F;
+  }
+  
+  .bg-dark-charcoal {
+    background-color: #14070F;
+  }
+
+  .bg-card-dark {
+    background-color: #1F0D18;
+  }
+
+  .text-accent {
+    color: #FF5C3A;
+  }
+
+  .bg-accent {
+    background-color: #FF5C3A;
+  }
+
+  .border-accent {
+    border-color: #FF5C3A;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 25px rgba(255, 92, 58, 0.35);
+  }
+
+  .glow-accent-lg {
+    box-shadow: 0 0 50px rgba(255, 92, 58, 0.45);
+  }
+
+  .glow-accent-hover:hover {
+    box-shadow: 0 0 35px rgba(255, 92, 58, 0.5);
+  }
+
+  .glass-card {
+    background: linear-gradient(158deg,
+      rgba(255, 214, 180, 0.10) 0%,
+      rgba(255, 190, 150, 0.03) 42%,
+      rgba(18, 6, 12, 0.42) 100%);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 214, 180, 0.20);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 226, 195, 0.22),
+      0 40px 90px -45px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Glossy 1px gradient edge that rides the top of a panel */
+  .glass-edge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(150deg,
+      rgba(255, 232, 200, 0.62) 0%,
+      rgba(255, 190, 120, 0.14) 26%,
+      transparent 55%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Specular sheen in a panel's top-left corner */
+  .specular::after {
+    content: '';
+    position: absolute;
+    top: -35%;
+    left: -20%;
+    width: 85%;
+    height: 75%;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, rgba(255, 255, 255, 0.2), transparent 100%);
+    filter: blur(26px);
+    pointer-events: none;
+  }
+
+  /* Ambient light blooms */
+  .bloom {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+  }
+
+  .bloom-warm {
+    background: radial-gradient(closest-side,
+      rgba(255, 209, 102, 0.95) 0%,
+      rgba(255, 122, 60, 0.6) 30%,
+      rgba(255, 61, 139, 0.34) 58%,
+      transparent 100%);
+    filter: blur(70px);
+  }
+
+  .bloom-ember {
+    background: radial-gradient(closest-side,
+      rgba(255, 61, 139, 0.7) 0%,
+      rgba(168, 44, 96, 0.38) 46%,
+      transparent 100%);
+    filter: blur(90px);
+  }
+
+  /* Frosted Panel — translucent glass over the aurora background */
+  .glass-panel {
+    background: linear-gradient(158deg,
+      rgba(255, 214, 180, 0.11) 0%,
+      rgba(255, 190, 150, 0.032) 42%,
+      rgba(18, 6, 12, 0.42) 100%);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 214, 180, 0.20);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 226, 195, 0.24),
+      0 40px 90px -45px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Highlighted Plan — glass with an electric-blue rim light */
+  .glass-panel-accent {
+    background: linear-gradient(158deg,
+      rgba(255, 154, 46, 0.24) 0%,
+      rgba(255, 61, 139, 0.14) 45%,
+      rgba(20, 6, 14, 0.46) 100%);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 190, 120, 0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 0 60px -20px rgba(255, 209, 102, 0.55),
+      0 0 0 1px rgba(255, 154, 46, 0.16),
+      0 0 70px -12px rgba(255, 154, 46, 0.55),
+      0 45px 95px -45px rgba(0, 0, 0, 0.95);
+  }
+
+  .bloom-vip {
+    background: radial-gradient(closest-side,
+      rgba(255, 214, 130, 0.9) 0%,
+      rgba(255, 168, 46, 0.6) 34%,
+      rgba(214, 108, 20, 0.32) 62%,
+      transparent 100%);
+    filter: blur(80px);
+  }
+
+  /* VIP tier — royal honey. The basic tier is ember glass; VIP goes darker and
+     richer underneath with a bright gold rim, so it reads as the same family
+     turned up rather than an unrelated colour. */
+  .glass-panel-vip {
+    background: linear-gradient(158deg,
+      rgba(255, 209, 102, 0.24) 0%,
+      rgba(255, 154, 46, 0.15) 42%,
+      rgba(30, 14, 4, 0.62) 100%);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid rgba(255, 216, 138, 0.7);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      inset 0 0 70px -18px rgba(255, 196, 88, 0.65),
+      0 0 0 1px rgba(255, 190, 90, 0.22),
+      0 0 80px -14px rgba(255, 170, 60, 0.7),
+      0 45px 95px -45px rgba(0, 0, 0, 0.98);
+  }
+
+  .vip-gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF0C4 30%, #FFD166 62%, #FF9A2E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .pill-vip {
+    background: linear-gradient(135deg, #FFE9A8 0%, #FFD166 45%, #FF9A2E 100%);
+    color: #1A0B05;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .pill-vip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -10px rgba(255, 190, 90, 0.7);
+  }
+
+  /* Honeycomb tile — laid over the best-deal card so the pack feels like part
+     of the hive rather than a plain panel. */
+  .honeycomb-tint {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'%3E%3Cg fill='none' stroke='%23FFD166' stroke-width='1.5'%3E%3Cpath d='M28 1 L52 15 L52 43 L28 57 L4 43 L4 15 Z'/%3E%3Cpath d='M0 -15 L24 -1 L24 27 L0 41 L-24 27 L-24 -1 Z'/%3E%3Cpath d='M56 -15 L80 -1 L80 27 L56 41 L32 27 L32 -1 Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 56px 64px;
+  }
+
+  /* White Pill CTA (reference-style) */
+  .pill-light {
+    background: #FFFFFF;
+    color: #000000;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .pill-light:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -10px rgba(255, 255, 255, 0.35);
+  }
+
+  /* Blue Aurora Blob — the light source behind dark sections */
+  .aurora {
+    background: radial-gradient(closest-side, rgba(255, 209, 102, 0.9) 0%, rgba(255, 92, 58, 0.6) 36%, rgba(255, 61, 139, 0.3) 64%, transparent 100%);
+    filter: blur(60px);
+  }
+
+  .aurora-soft {
+    background: radial-gradient(closest-side, rgba(255, 122, 60, 0.5) 0%, rgba(168, 44, 96, 0.3) 55%, transparent 100%);
+    filter: blur(90px);
+  }
+
+  /* Grain — keeps the big gradients from banding */
+  .grain-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .glass-card-hover:hover {
+    border-color: rgba(255, 92, 58, 0.5);
+    box-shadow: 0 10px 30px -10px rgba(255, 92, 58, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .accent-gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF 34%, #FFD166 66%, #FF5C3A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .accent-button-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF1E4 100%);
+  }
+
+  .accent-button-gradient:hover {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFE0B3 100%);
+  }
+
+  /* Editorial Typography Families */
+  .font-display {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-condensed {
+    font-family: 'Oswald', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-editorial {
+    font-family: 'EB Garamond', Georgia, serif;
+  }
+
+  /* Hollow Poster-Style Lettering */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.75);
+  }
+
+  .text-outline-hero {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+  }
+
+  /* Film Grain Texture Overlay for Posters */
+  .film-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+
+  /* Internal glow carried by the stroke itself */
+  .outline-glow {
+    filter:
+      drop-shadow(0 0 14px rgba(255, 200, 140, 0.45))
+      drop-shadow(0 0 40px rgba(255, 92, 58, 0.3))
+      drop-shadow(0 26px 34px rgba(0, 0, 0, 0.95));
+  }
+
+  /* Distant light trail */
+  .light-trail {
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(120, 200, 255, 0.55) 35%,
+      rgba(255, 225, 180, 0.9) 50%,
+      rgba(120, 200, 255, 0.5) 65%,
+      transparent 100%);
+  }
+
+  /* Keeps the poster wheel from crowding the buttons below it */
+  .mask-fade-ring {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 58%, transparent 82%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 58%, transparent 82%);
+  }
+
+  /* Scrollable without the bar showing — used by the phone nav dock, which
+     only scrolls on the narrowest handsets. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Horizontal fade for the marquee rails */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+}
+
+/* Custom Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* Bees hover rather than sit — a small drift with a bit of tilt. */
+@keyframes bee-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  33%      { transform: translate3d(6px, -8px, 0) rotate(4deg); }
+  66%      { transform: translate3d(-5px, -4px, 0) rotate(-3deg); }
+}
+
+.animate-bee {
+  animation: bee-drift 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bee { animation: none; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Same track running the other way */
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 35s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse var(--marquee-duration, 45s) linear infinite;
+}
+
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Library counter — rises in, holds, then leaves; two of these run half a
+   cycle apart so one number is always taking over from the other. */
+@keyframes stat-cycle {
+  0%   { opacity: 0; transform: translateY(16px) scale(0.97); }
+  6%   { opacity: 1; transform: translateY(0) scale(1); }
+  40%  { opacity: 1; transform: translateY(0) scale(1); }
+  48%  { opacity: 0; transform: translateY(-16px) scale(0.98); }
+  100% { opacity: 0; transform: translateY(-16px) scale(0.98); }
+}
+
+.animate-stat-cycle {
+  /* `backwards` keeps the delayed figure at its 0% (hidden) state instead of
+     showing at full opacity until its delay elapses. */
+  animation: stat-cycle 11s cubic-bezier(0.16, 1, 0.3, 1) infinite backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-stat-cycle { animation: none; opacity: 1; transform: none; }
+}
+
+/* Poster ring — the wheel turns while each poster counter-turns at the same
+   rate, so they orbit without tipping over. */
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ring-spin-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+.animate-ring {
+  animation: ring-spin var(--ring-duration, 60s) linear infinite;
+}
+
+.animate-ring-reverse {
+  animation: ring-spin-reverse var(--ring-duration, 60s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ring,
+  .animate-ring-reverse { animation: none; }
+}
+
+/* Infinite Vertical Poster Columns (Film Wall) */
+@keyframes scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-scroll-up {
+  animation: scroll-up var(--scroll-duration, 45s) linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down var(--scroll-duration, 55s) linear infinite;
+}
+
+.film-wall:hover .animate-scroll-up,
+.film-wall:hover .animate-scroll-down {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-up,
+  .animate-scroll-down,
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #14070F;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5C3A;
+}

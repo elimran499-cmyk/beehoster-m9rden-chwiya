@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forma AI — Pricing</title>
+  <meta name="description" content="Forma AI pricing — simple plans for creators, freelancers and studios. Start free, upgrade when you grow." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 16c2.5 0 3.5-8 6-8s3.5 8 6 8 3.5-8 6-8' fill='none' stroke='%23FF9A2E' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    :root {
+      --bg: #14070F;
+      --amber: #FF9A2E;
+      --coral: #FF5C3A;
+      --magenta: #FF3D8B;
+      --gold: #FFD166;
+      --ink: #F6EDE7;
+    }
+
+    html { background-color: var(--bg); }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Ambient light: coral/magenta blooms behind the containers ──────── */
+    .bloom {
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .bloom-warm {
+      background: radial-gradient(closest-side,
+        rgba(255, 209, 102, 0.95) 0%,
+        rgba(255, 122, 60, 0.6) 30%,
+        rgba(255, 61, 139, 0.34) 58%,
+        transparent 100%);
+      filter: blur(70px);
+    }
+
+    .bloom-ember {
+      background: radial-gradient(closest-side,
+        rgba(255, 61, 139, 0.7) 0%,
+        rgba(168, 44, 96, 0.38) 46%,
+        transparent 100%);
+      filter: blur(90px);
+    }
+
+    /* Film grain — stops the big gradients from banding */
+    .grain {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    }
+
+    /* ── Frosted glass ──────────────────────────────────────────────────── */
+    .glass {
+      background: linear-gradient(158deg,
+        rgba(255, 214, 180, 0.11) 0%,
+        rgba(255, 190, 150, 0.032) 42%,
+        rgba(18, 6, 12, 0.42) 100%);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      border: 1px solid rgba(255, 214, 180, 0.20);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 226, 195, 0.24),
+        0 40px 90px -45px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Glossy edge highlight riding the top of each card */
+    .glass-edge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(150deg,
+        rgba(255, 232, 200, 0.62) 0%,
+        rgba(255, 190, 120, 0.14) 26%,
+        transparent 55%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── Highlighted (Pro) card: gold rim light + inner specular ────────── */
+    .glass-pro {
+      background: linear-gradient(158deg,
+        rgba(255, 154, 46, 0.24) 0%,
+        rgba(255, 61, 139, 0.14) 45%,
+        rgba(20, 6, 14, 0.46) 100%);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255, 190, 120, 0.6);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 235, 210, 0.34),
+        inset 0 0 60px -20px rgba(255, 209, 102, 0.55),
+        0 0 0 1px rgba(255, 122, 60, 0.18),
+        0 0 70px -12px rgba(255, 92, 58, 0.55),
+        0 45px 95px -45px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Specular sheen sitting in the card's top-left corner */
+    .specular::after {
+      content: '';
+      position: absolute;
+      top: -35%;
+      left: -20%;
+      width: 85%;
+      height: 75%;
+      border-radius: 9999px;
+      background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent 100%);
+      filter: blur(26px);
+      pointer-events: none;
+    }
+
+    /* ── Oversized header typography ────────────────────────────────────── */
+    .display-ghost {
+      background-image: linear-gradient(178deg,
+        rgba(255, 170, 110, 0.44) 0%,
+        rgba(255, 61, 139, 0.28) 42%,
+        rgba(255, 255, 255, 0.05) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .display-forma {
+      background-image: linear-gradient(180deg, #FFFFFF 0%, #FFD2A3 45%, #FF7A3D 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ── White pill CTA ─────────────────────────────────────────────────── */
+    .pill-white {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF1E4 100%);
+      color: #07070A;
+      transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease;
+    }
+
+    .pill-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px -14px rgba(255, 214, 180, 0.5);
+    }
+
+    .pill-white:active { transform: translateY(0); }
+
+    /* Focus ring that stays visible on the dark backdrop */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 9999px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen">
+
+  <!-- ══ Ambient background lights ═══════════════════════════════════════ -->
+  <div aria-hidden="true" class="fixed inset-0 z-0 overflow-hidden">
+    <div class="bloom bloom-warm w-[46rem] h-[42rem] -top-40 left-1/2 -translate-x-1/3 opacity-90"></div>
+    <div class="bloom bloom-ember w-[42rem] h-[40rem] top-[26rem] -left-44 opacity-90"></div>
+    <div class="bloom bloom-warm w-[40rem] h-[38rem] top-[46rem] left-[38%] opacity-60"></div>
+    <div class="bloom bloom-ember w-[38rem] h-[34rem] top-[8rem] -right-32 opacity-75"></div>
+    <div class="bloom bloom-warm w-[30rem] h-[28rem] top-[78rem] -left-24 opacity-45"></div>
+    <div class="absolute inset-0 grain opacity-[0.13] mix-blend-overlay"></div>
+  </div>
+
+  <!-- ══ Floating pill navbar ════════════════════════════════════════════ -->
+  <header class="fixed top-4 sm:top-6 inset-x-0 z-50 px-4">
+    <nav class="mx-auto max-w-3xl">
+      <div class="glass glass-edge relative rounded-full pl-2 pr-2 py-2 flex items-center justify-between gap-2">
+
+        <!-- Brand mark -->
+        <a href="#" class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-colors" aria-label="Forma AI home">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 16c2.5 0 3.5-8 6-8s3.5 8 6 8 3.5-8 6-8" />
+          </svg>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="hidden sm:flex items-center gap-1 text-sm">
+          <li><a class="px-4 py-2 rounded-full text-white/60 hover:text-white hover:bg-white/5 transition-colors" href="#top">Home</a></li>
+          <li><a class="px-4 py-2 rounded-full text-white font-semibold bg-white/5" href="#pricing" aria-current="page">Pricing</a></li>
+          <li><a class="px-4 py-2 rounded-full text-white/60 hover:text-white hover:bg-white/5 transition-colors" href="#faq">FAQ</a></li>
+          <li><a class="px-4 py-2 rounded-full text-white/60 hover:text-white hover:bg-white/5 transition-colors" href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- CTA -->
+        <a href="#pricing" class="pill-white shrink-0 px-5 sm:px-6 py-2.5 rounded-full text-sm font-semibold">
+          Download
+        </a>
+      </div>
+
+      <!-- Mobile links -->
+      <ul class="sm:hidden mt-2 flex items-center justify-center gap-1 text-xs">
+        <li><a class="px-3 py-1.5 rounded-full text-white/60 hover:text-white transition-colors" href="#top">Home</a></li>
+        <li><a class="px-3 py-1.5 rounded-full text-white font-semibold bg-white/10" href="#pricing">Pricing</a></li>
+        <li><a class="px-3 py-1.5 rounded-full text-white/60 hover:text-white transition-colors" href="#faq">FAQ</a></li>
+        <li><a class="px-3 py-1.5 rounded-full text-white/60 hover:text-white transition-colors" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top" class="relative z-10">
+
+    <!-- ══ Header: oversized background typography ═══════════════════════ -->
+    <section class="relative overflow-hidden pt-44 sm:pt-52 lg:pt-64 pb-4">
+      <div aria-hidden="true" class="absolute inset-x-0 top-24 sm:top-28 flex justify-center pointer-events-none select-none px-4">
+        <div class="relative w-full max-w-6xl text-center">
+          <span class="font-display block text-[24vw] lg:text-[18rem] leading-[0.8] font-extrabold display-ghost">
+            Pricing
+          </span>
+          <span class="font-display absolute right-[4%] top-[2%] text-[8vw] lg:text-[5.5rem] leading-none font-bold display-forma opacity-90">
+            Forma AI
+          </span>
+        </div>
+      </div>
+
+      <div class="relative max-w-3xl mx-auto px-4 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--amber)]"></span>
+          Simple, honest pricing
+        </span>
+        <h1 class="font-display mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+          Plans that scale <span class="display-forma">with your craft</span>
+        </h1>
+        <p class="mt-5 text-base sm:text-lg leading-relaxed text-white/55 max-w-xl mx-auto">
+          Start free and upgrade the moment your work outgrows it. Every plan includes the full Forma AI editor,
+          cloud sync, and unlimited exports of what you have already made.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ Pricing cards ═════════════════════════════════════════════════ -->
+    <section id="pricing" class="relative px-4 pt-14 sm:pt-20 pb-24">
+      <div class="max-w-7xl mx-auto grid gap-6 lg:gap-7 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+
+        <!-- ── Free ── -->
+        <article class="glass glass-edge relative rounded-[2rem] p-7 sm:p-8 flex flex-col transition-transform duration-500 hover:-translate-y-1">
+          <header>
+            <h2 class="text-lg font-medium text-white/70">Free</h2>
+            <p class="font-display mt-1 text-5xl sm:text-[3.25rem] leading-none font-extrabold tracking-tight text-white">Free</p>
+            <p class="mt-5 text-sm leading-relaxed text-white/50">
+              For creators taking their first steps with Forma.
+            </p>
+          </header>
+
+          <ul class="mt-8 space-y-4 grow">
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Up to 3 projects in the cloud
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Image export up to 1080p
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Basic editing tools
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Free templates and icons
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Access via web and mobile app
+            </li>
+          </ul>
+
+          <button type="button" class="pill-white mt-9 w-full py-4 rounded-full text-sm font-semibold">
+            Choose Plan
+          </button>
+        </article>
+
+        <!-- ── Standard ── -->
+        <article class="glass glass-edge relative rounded-[2rem] p-7 sm:p-8 flex flex-col transition-transform duration-500 hover:-translate-y-1">
+          <header>
+            <h2 class="text-lg font-medium text-white/70">Standard</h2>
+            <p data-price="standard" class="font-display mt-1 text-5xl sm:text-[3.25rem] leading-none font-extrabold tracking-tight text-white">
+              $9,99<span class="text-2xl font-bold text-white/60">/m</span>
+            </p>
+            <p class="mt-5 text-sm leading-relaxed text-white/50">
+              For freelancers and small teams who need more freedom and flexibility.
+            </p>
+          </header>
+
+          <ul class="mt-8 space-y-4 grow">
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Up to 50 projects in the cloud
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Export up to 4K
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Advanced editing toolkit
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Team collaboration (up to 5 members)
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/80">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Access to premium template library
+            </li>
+          </ul>
+
+          <button type="button" class="pill-white mt-9 w-full py-4 rounded-full text-sm font-semibold">
+            Choose Plan
+          </button>
+        </article>
+
+        <!-- ── Pro (highlighted) ── -->
+        <article class="glass-pro specular relative z-10 rounded-[2rem] p-7 sm:p-8 flex flex-col transition-transform duration-500 hover:-translate-y-1 md:col-span-2 lg:col-span-1">
+          <span class="absolute -top-3 left-8 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] pill-white shadow-lg">
+            Most popular
+          </span>
+
+          <header>
+            <h2 class="text-lg font-medium text-white/80">Pro</h2>
+            <p data-price="pro" class="font-display mt-1 text-5xl sm:text-[3.25rem] leading-none font-extrabold tracking-tight text-white">
+              $19,99<span class="text-2xl font-bold text-white/60">/m</span>
+            </p>
+            <p class="mt-5 text-sm leading-relaxed text-white/60">
+              For studios, agencies, and professional creators working with brands.
+            </p>
+          </header>
+
+          <ul class="mt-8 space-y-4 grow">
+            <li class="flex items-start gap-3 text-sm text-white/90">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Unlimited projects
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/90">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Export up to 8K + animations
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/90">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              AI-powered content generation tools
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/90">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Unlimited team members
+            </li>
+            <li class="flex items-start gap-3 text-sm text-white/90">
+              <span class="mt-px shrink-0 w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              Brand customization (logos, fonts, color palettes)
+            </li>
+          </ul>
+
+          <button type="button" class="pill-white mt-9 w-full py-4 rounded-full text-sm font-semibold">
+            Choose Plan
+          </button>
+        </article>
+      </div>
+
+      <!-- Billing toggle -->
+      <div class="max-w-7xl mx-auto mt-10 flex items-center gap-3">
+        <button id="billingToggle" type="button" role="switch" aria-checked="false" aria-label="Switch to yearly billing"
+          class="relative w-16 h-9 rounded-full glass flex items-center px-1 transition-colors">
+          <span id="billingKnob" class="w-7 h-7 rounded-full bg-white shadow-lg transition-transform duration-300"></span>
+        </button>
+        <span class="text-sm font-medium text-white/70">Yearly <span class="text-white/40">— save 20%</span></span>
+      </div>
+    </section>
+
+    <!-- ══ FAQ ═══════════════════════════════════════════════════════════ -->
+    <section id="faq" class="relative px-4 pb-24">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white text-center">
+          Frequently asked
+        </h2>
+
+        <div class="mt-10 space-y-4">
+          <details class="glass glass-edge relative rounded-[1.5rem] p-6 group" open>
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-white font-semibold">
+              Can I switch plans later?
+              <span class="shrink-0 w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-white/55">
+              Yes. Upgrades apply immediately and we prorate the difference. Downgrades take effect at the end of your
+              current billing period, and your projects stay exactly where they are.
+            </p>
+          </details>
+
+          <details class="glass glass-edge relative rounded-[1.5rem] p-6 group">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-white font-semibold">
+              What happens to my work if I cancel?
+              <span class="shrink-0 w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-white/55">
+              Everything you have already exported is yours to keep, forever. Cloud projects stay readable on the Free
+              plan so you can download them at any time.
+            </p>
+          </details>
+
+          <details class="glass glass-edge relative rounded-[1.5rem] p-6 group">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-white font-semibold">
+              Do you offer team and education discounts?
+              <span class="shrink-0 w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-white/55">
+              Teams of five or more get volume pricing on Pro, and verified students and educators get Standard at no
+              cost for twelve months.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Contact CTA ═══════════════════════════════════════════════════ -->
+    <section id="contact" class="relative px-4 pb-28">
+      <div class="glass glass-edge specular relative max-w-5xl mx-auto rounded-[2.5rem] px-8 py-14 sm:px-14 sm:py-16 text-center overflow-hidden">
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+          Ready to make something?
+        </h2>
+        <p class="mt-4 text-base sm:text-lg text-white/55 max-w-xl mx-auto">
+          Download Forma AI and start with the Free plan. No card, no trial countdown, no lock-in.
+        </p>
+        <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#pricing" class="pill-white w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold">
+            Download for macOS
+          </a>
+          <a href="mailto:hello@example.com" class="glass w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold text-white/85 hover:text-white transition-colors">
+            Talk to sales
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══ Footer ══════════════════════════════════════════════════════════ -->
+  <footer class="relative z-10 px-4 pb-12">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/35">
+      <p>© 2026 Forma AI. All rights reserved.</p>
+      <nav class="flex items-center gap-6">
+        <a class="hover:text-white/70 transition-colors" href="#pricing">Pricing</a>
+        <a class="hover:text-white/70 transition-colors" href="#faq">FAQ</a>
+        <a class="hover:text-white/70 transition-colors" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Billing toggle — swaps monthly/yearly prices (20% off, billed monthly equivalent)
+    const toggle = document.getElementById('billingToggle');
+    const knob = document.getElementById('billingKnob');
+    const prices = { standard: ['$9,99', '$7,99'], pro: ['$19,99', '$15,99'] };
+
+    toggle.addEventListener('click', () => {
+      const yearly = toggle.getAttribute('aria-checked') === 'true' ? false : true;
+      toggle.setAttribute('aria-checked', String(yearly));
+      knob.style.transform = yearly ? 'translateX(1.75rem)' : 'translateX(0)';
+
+      document.querySelectorAll('[data-price]').forEach((el) => {
+        const key = el.dataset.price;
+        el.firstChild.textContent = prices[key][yearly ? 1 : 0];
+      });
+    });
+  </script>
+</body>
+</html>

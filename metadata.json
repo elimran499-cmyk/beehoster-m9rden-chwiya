@@ -1,0 +1,6 @@
+{
+  "name": "BEEHOSTER IPTV",
+  "description": "Officiële website van BEEHOSTER — 4K UHD IPTV-abonnementen",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
