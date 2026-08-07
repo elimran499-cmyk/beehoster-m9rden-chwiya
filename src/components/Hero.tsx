@@ -3,10 +3,6 @@ import { Play, Sparkles } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { whatsAppLink } from '../data/contact';
 
-interface HeroProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
-
 interface FilmCard {
   id: string;
   title: string;
@@ -164,7 +160,7 @@ const PosterRail: React.FC<{
    a light page, where dark artwork behind text reads as dirt. The catalogue
    now lives in one honest band below the fold line instead, and the column
    above it is a single centred measure on every screen. */
-export const Hero: React.FC<HeroProps> = () => (
+export const Hero: React.FC = () => (
   <section
     id="hero"
     className="relative overflow-hidden bg-page pt-28 sm:pt-32 lg:pt-36 pb-14 lg:pb-16"

@@ -4,11 +4,7 @@ import { BeehosterLogo } from './BeehosterLogo';
 import { WHATSAPP_DISPLAY, whatsAppLink } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
-interface FooterProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenOrderModal }) => {
+export const Footer: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

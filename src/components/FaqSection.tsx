@@ -4,13 +4,9 @@ import { ChevronDown, HelpCircle, Search } from 'lucide-react';
 import { whatsAppLink } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
-interface FaqProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
-
 /* Support lands in WhatsApp, so the callout links straight out instead of
    routing through the order panel. */
-export const FaqSection: React.FC<FaqProps> = () => {
+export const FaqSection: React.FC = () => {
   const [openFaqId, setOpenFaqId] = useState<string | null>('faq-1');
   const [filterCategory, setFilterCategory] = useState<string>('Alles');
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AmbientLights } from './components/AmbientLights';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -8,26 +8,11 @@ import { Pricing } from './components/Pricing';
 import { Testimonials } from './components/Testimonials';
 import { Blog } from './components/Blog';
 import { FaqSection } from './components/FaqSection';
-import { OrderModal } from './components/OrderModal';
 import { Footer } from './components/Footer';
 import { WhatsAppIcon } from './components/WhatsAppIcon';
 import { WHATSAPP_DISPLAY, whatsAppLink } from './data/contact';
 
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalPlanId, setModalPlanId] = useState<string>('plan-12m');
-
-  const handleOpenOrderModal = (planId?: string) => {
-    if (planId) {
-      setModalPlanId(planId);
-    }
-    setIsModalOpen(true);
-  };
-
-  const handleCloseOrderModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="relative min-h-screen bg-page text-ink flex flex-col font-sans">
 
@@ -35,21 +20,21 @@ export default function App() {
       <AmbientLights />
 
       {/* Sticky top bar */}
-      <Navbar onOpenOrderModal={handleOpenOrderModal} />
+      <Navbar />
 
       {/* The header floats over the page rather than pushing it down, so the
           hero owns its own top padding and nothing needs reserving here. */}
       <main className="relative z-10 flex-grow">
         
         {/* Hero Section */}
-        <Hero onOpenOrderModal={handleOpenOrderModal} />
+        <Hero />
 
         {/* Channel & VOD Explorer — the catalogue answers the first question a
             visitor has, so it leads straight out of the hero */}
-        <ChannelExplorer onOpenOrderModal={handleOpenOrderModal} />
+        <ChannelExplorer />
 
         {/* Subscription Pricing Plans */}
-        <Pricing onOpenOrderModal={handleOpenOrderModal} />
+        <Pricing />
 
         {/* 3x2 Bento Key Features Grid */}
         <Features />
@@ -61,11 +46,11 @@ export default function App() {
         <Blog />
 
         {/* FAQ Accordion Section */}
-        <FaqSection onOpenOrderModal={handleOpenOrderModal} />
+        <FaqSection />
 
       </main>
 
-      <Footer onOpenOrderModal={handleOpenOrderModal} />
+      <Footer />
 
       {/* Floating WhatsApp contact — on every screen now that the phone dock
           which used to carry it is gone */}
@@ -81,13 +66,6 @@ export default function App() {
           <WhatsAppIcon className="w-6 h-6" />
         </a>
       </div>
-
-      {/* Order Modal */}
-      <OrderModal
-        isOpen={isModalOpen}
-        initialPlanId={modalPlanId}
-        onClose={handleCloseOrderModal}
-      />
 
     </div>
   );

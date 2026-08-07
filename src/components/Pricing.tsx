@@ -5,10 +5,6 @@ import { BeeGlyph } from './BeehosterLogo';
 import { whatsAppLink } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
-interface PricingProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
-
 /* One feature line. `highlight` bolds the headline benefits. */
 const FeatureRow: React.FC<{ feature: string; accent: boolean; highlight?: boolean; vip?: boolean }> = ({
   feature,
@@ -32,7 +28,7 @@ const FeatureRow: React.FC<{ feature: string; accent: boolean; highlight?: boole
   </div>
 );
 
-export const Pricing: React.FC<PricingProps> = ({ onOpenOrderModal }) => {
+export const Pricing: React.FC = () => {
   const [tier, setTier] = useState<'basic' | 'vip'>('basic');
   const [devices, setDevices] = useState<number>(1);
 
@@ -40,6 +36,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenOrderModal }) => {
   const isVip = tier === 'vip';
 
   const formatPrice = (val: number) => `€${val.toFixed(2)}`;
+
+  /* Everything the card shows travels with the click, so the chat opens with
+     the exact pack, tier, device count and price already written out. */
+  const orderMessage = (label: string, price: number) =>
+    `Hoi BEEHOSTER! Ik wil graag het pakket ${activeTier.name} — ${label} bestellen ` +
+    `voor ${devices} ${devices === 1 ? 'apparaat' : 'apparaten'} (${formatPrice(price)}). ` +
+    `Kunnen jullie mij de betaalgegevens en activatiestappen sturen?`;
 
   return (
     <section id="pricing" className="relative z-10 py-28 overflow-hidden">
@@ -224,15 +227,17 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenOrderModal }) => {
                 </div>
 
                 {/* CTA */}
-                <button
-                  onClick={() => onOpenOrderModal(pack.planId)}
+                <a
+                  href={whatsAppLink(orderMessage(pack.label, price))}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`mt-6 w-full py-4 text-sm font-bold rounded-full flex items-center justify-center gap-2 ${
                     isVip ? 'pill-vip shadow-lg shadow-accent/35' : 'pill-light'
                   }`}
                 >
                   <WhatsAppIcon className={`w-4 h-4 ${isVip ? 'text-[#0E5B2A]' : 'text-[#25D366]'}`} />
                   {isVip ? 'Word VIP Nu' : 'Bestel Nu'}
-                </button>
+                </a>
 
                 <div className="my-6 h-px bg-paper" />
 

@@ -6,6 +6,11 @@ export const WHATSAPP_NUMBER = '447832486269';
 /** Human-readable form, used wherever the number is shown rather than linked. */
 export const WHATSAPP_DISPLAY = '+44 7832 486269';
 
+/** What an order CTA writes into the chat when it doesn't know the chosen pack. */
+export const ORDER_MESSAGE =
+  'Hoi BEEHOSTER! Ik wil graag een IPTV-abonnement bestellen. ' +
+  'Kunnen jullie mij de pakketten en betaalgegevens sturen?';
+
 /** Builds a wa.me deep link, optionally with the chat pre-filled. */
 export const whatsAppLink = (message?: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}${message ? `?text=${encodeURIComponent(message)}` : ''}`;

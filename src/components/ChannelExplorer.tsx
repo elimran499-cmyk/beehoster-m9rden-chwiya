@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { SAMPLE_CHANNELS } from '../data/iptvData';
 import { ChannelItem } from '../types';
 import { Sparkles, Radio } from 'lucide-react';
-
-interface ChannelExplorerProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
+import { whatsAppLink } from '../data/contact';
 
 /* Generated monogram logo — a small colour-coded wordmark tile so every channel
    has a "logo" without pulling in real broadcaster artwork. The ramp stays
@@ -71,7 +68,7 @@ const ChannelChip: React.FC<{ channel: ChannelItem }> = ({ channel }) => (
   />
 );
 
-export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderModal }) => {
+export const ChannelExplorer: React.FC = () => {
   const half = Math.ceil(SAMPLE_CHANNELS.length / 2);
   /* Each half of a marquee track must be wider than the viewport or the loop
      leaves gaps — the logo chips are narrow, so repeat the list three times. */
@@ -133,13 +130,18 @@ export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderMod
             </div>
           </div>
 
-          <button
-            onClick={() => onOpenOrderModal('plan-12m')}
+          <a
+            href={whatsAppLink(
+              'Hoi BEEHOSTER! Kunnen jullie mij de volledige zenderlijst sturen? ' +
+                'Ik ben ook benieuwd naar de M3U-playlist per land en het PPV-programma.'
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
             className="shrink-0 px-6 py-3 text-xs font-bold accent-button-gradient rounded-xl shadow-lg shadow-accent/30 hover:scale-105 transition-all flex items-center gap-2"
           >
             <Sparkles className="w-4 h-4 fill-current" />
             <span>Vraag de volledige zenderlijst aan</span>
-          </button>
+          </a>
         </div>
 
       </div>

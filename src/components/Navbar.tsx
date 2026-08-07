@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { BeehosterLogo } from './BeehosterLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
-import { whatsAppLink } from '../data/contact';
-
-interface NavbarProps {
-  onOpenOrderModal: (planId?: string) => void;
-}
+import { ORDER_MESSAGE, whatsAppLink } from '../data/contact';
 
 const navLinks = [
   { name: 'Start', href: '#hero', id: 'hero' },
@@ -27,7 +23,7 @@ const Wordmark: React.FC<{ className?: string }> = ({ className = 'text-lg' }) =
    right. It rides transparent over the top of the hero and picks up its
    frosted plate once you start scrolling, so the masthead isn't fighting a
    solid bar on first paint. Phones get the same links in a drawer. */
-export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
+export const Navbar: React.FC = () => {
   const [activeId, setActiveId] = useState<string>('hero');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -134,13 +130,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
               <WhatsAppIcon className="w-[18px] h-[18px]" />
             </a>
 
-            <button
-              onClick={() => onOpenOrderModal('plan-12m')}
+            <a
+              href={whatsAppLink(ORDER_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-sm font-bold accent-button-gradient shadow-[0_10px_24px_-14px_rgba(190,18,60,0.9)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
             >
               <Sparkles className="w-4 h-4 fill-current" />
               Bestel nu
-            </button>
+            </a>
 
             <button
               onClick={() => setMenuOpen((open) => !open)}
@@ -183,16 +181,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal }) => {
           })}
 
           <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                onOpenOrderModal('plan-12m');
-              }}
+            <a
+              href={whatsAppLink(ORDER_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
               className="w-full py-3.5 rounded-full text-sm font-bold accent-button-gradient flex items-center justify-center gap-2"
             >
               <Sparkles className="w-4 h-4 fill-current" />
               Bestel nu
-            </button>
+            </a>
 
             <a
               href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag meer weten over jullie IPTV-abonnementen.')}
