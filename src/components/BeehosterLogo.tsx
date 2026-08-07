@@ -18,70 +18,69 @@ export const BeeGlyph: React.FC<React.SVGProps<SVGSVGElement>> = ({
   </svg>
 );
 
-/* BEEHOSTER mark — a bee carrying a power symbol, set in a honeycomb badge.
-   Same construction as the reference art, recoloured into the site's palette:
-   deep plum badge, ember-to-gold bee, warm cream outlines. Vectors, so it
-   stays crisp from the 24px rail icon up to the footer lockup. */
+/* BEEHOSTER mark — a bee on a light badge with a crimson rim.
+   Restyled from the original: the plum badge is now paper, the honeycomb ring
+   and the power symbol the bee used to carry are gone, and the accent does the
+   work through the rim, the wings and the abdomen stripes. Keeping the body in
+   ink rather than crimson is what lets it still read as a bee at 20px, where a
+   single-hue mark turns into a blob. Vectors, so it stays crisp from the
+   header icon up to the footer lockup. */
 export const BeehosterLogo: React.FC<React.SVGProps<SVGSVGElement>> = ({
   className = 'w-8 h-8',
   ...props
 }) => {
-  /* The mark renders several times per page (rail, top bar, footer). Shared
-     gradient ids would all resolve to whichever copy the browser saw first,
+  /* The mark renders several times per page (header, footer). Shared gradient
+     and clip ids would all resolve to whichever copy the browser saw first,
      which is how the badge ended up painting empty in some places — so each
      instance gets its own. */
   const uid = React.useId().replace(/:/g, '');
   const badgeId = `bh-badge-${uid}`;
-  const goldId = `bh-gold-${uid}`;
+  const wingId = `bh-wing-${uid}`;
+  const bodyClipId = `bh-body-${uid}`;
 
   return (
   <svg viewBox="0 0 64 64" className={className} aria-hidden="true" focusable="false" {...props}>
     <defs>
       <linearGradient id={badgeId} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#33121F" />
-        <stop offset="100%" stopColor="#14070F" />
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="100%" stopColor="#FDF1F4" />
       </linearGradient>
-      <linearGradient id={goldId} x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#FFE3A3" />
-        <stop offset="52%" stopColor="#FFD166" />
-        <stop offset="100%" stopColor="#FF9A2E" />
+      <linearGradient id={wingId} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#F9A8C0" />
+        <stop offset="100%" stopColor="#E11D48" />
       </linearGradient>
+      <clipPath id={bodyClipId}>
+        <circle cx="32" cy="37" r="12.5" />
+      </clipPath>
     </defs>
 
     {/* Badge — solid plate first so the mark is never see-through against the
-        glass panels it sits on, gradient on top for depth. */}
-    <rect x="3" y="3" width="58" height="58" rx="20" fill="#1A0912" />
-    <rect x="3" y="3" width="58" height="58" rx="20" fill={`url(#${badgeId})`} stroke="#FF5C3A" strokeWidth="2.5" />
+        frosted panels it sits on, gradient on top for depth. */}
+    <rect x="3" y="3" width="58" height="58" rx="20" fill="#FFFFFF" />
+    <rect x="3" y="3" width="58" height="58" rx="20" fill={`url(#${badgeId})`} stroke="#BE123C" strokeWidth="2.5" />
 
-    {/* Honeycomb ring */}
-    <g stroke="#FF9A2E" strokeWidth="1.6" fill="none" opacity="0.75">
-      <polygon points="14,22 18,19.5 22,22 22,27 18,29.5 14,27" />
-      <polygon points="42,22 46,19.5 50,22 50,27 46,29.5 42,27" />
-      <polygon points="12,33 16,30.5 20,33 20,38 16,40.5 12,38" />
-      <polygon points="44,33 48,30.5 52,33 52,38 48,40.5 44,38" />
-      <polygon points="24,45 28,42.5 32,45 32,50 28,52.5 24,50" />
-      <polygon points="32,45 36,42.5 40,45 40,50 36,52.5 32,50" />
-    </g>
-
-    {/* Wings */}
-    <g fill={`url(#${goldId})`} stroke="#FFEBD1" strokeWidth="1.4">
+    {/* Wings — translucent so they read as wings rather than as two more
+        solid shapes competing with the body. */}
+    <g fill={`url(#${wingId})`} fillOpacity="0.5" stroke="#BE123C" strokeWidth="1.3">
       <ellipse cx="17" cy="27" rx="11" ry="6.4" transform="rotate(-22 17 27)" />
       <ellipse cx="47" cy="27" rx="11" ry="6.4" transform="rotate(22 47 27)" />
     </g>
 
     {/* Antennae */}
-    <g stroke="#FFEBD1" strokeWidth="1.6" strokeLinecap="round" fill="none">
+    <g stroke="#16150F" strokeWidth="1.9" strokeLinecap="round" fill="none">
       <path d="M28.5 12.5c-1.8-1.6-3.6-2.2-5.4-1.9" />
       <path d="M35.5 12.5c1.8-1.6 3.6-2.2 5.4-1.9" />
     </g>
 
     {/* Head */}
-    <circle cx="32" cy="17.5" r="6" fill={`url(#${goldId})`} stroke="#FFEBD1" strokeWidth="1.6" />
+    <circle cx="32" cy="17.5" r="6" fill="#16150F" />
 
-    {/* Body carrying the power symbol */}
-    <circle cx="32" cy="37" r="12.5" fill={`url(#${goldId})`} stroke="#FFEBD1" strokeWidth="1.8" />
-    <path d="M25.6 32.4a8 8 0 1 0 12.8 0" fill="none" stroke="#14070F" strokeWidth="3.2" strokeLinecap="round" />
-    <path d="M32 26.5v10" fill="none" stroke="#14070F" strokeWidth="3.2" strokeLinecap="round" />
+    {/* Body with two accent stripes, clipped to the abdomen */}
+    <circle cx="32" cy="37" r="12.5" fill="#16150F" />
+    <g clipPath={`url(#${bodyClipId})`}>
+      <rect x="18" y="30.6" width="28" height="4.4" fill="#BE123C" />
+      <rect x="18" y="39.2" width="28" height="4.4" fill="#BE123C" />
+    </g>
   </svg>
   );
 };

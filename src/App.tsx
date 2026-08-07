@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AmbientLights } from './components/AmbientLights';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { DeviceBanner } from './components/DeviceBanner';
 import { ChannelExplorer } from './components/ChannelExplorer';
 import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
@@ -30,18 +29,17 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-pitch-black text-zinc-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="relative min-h-screen bg-page text-ink flex flex-col font-sans">
 
-      {/* Shared neon light field behind every section */}
+      {/* Shared warm light field behind every section */}
       <AmbientLights />
-      
-      {/* Floating rail navigation */}
+
+      {/* Sticky top bar */}
       <Navbar onOpenOrderModal={handleOpenOrderModal} />
 
-      {/* From sm up the page clears the rail's collapsed width so the nav never
-          covers copy — the rail expands over the page, not into it. Phones get
-          their full width back; the dock sits at the bottom instead. */}
-      <main className="relative z-10 flex-grow sm:pr-[5.5rem] lg:pr-24">
+      {/* The header floats over the page rather than pushing it down, so the
+          hero owns its own top padding and nothing needs reserving here. */}
+      <main className="relative z-10 flex-grow">
         
         {/* Hero Section */}
         <Hero onOpenOrderModal={handleOpenOrderModal} />
@@ -52,9 +50,6 @@ export default function App() {
 
         {/* Subscription Pricing Plans */}
         <Pricing onOpenOrderModal={handleOpenOrderModal} />
-
-        {/* Compatible Devices Banner */}
-        <DeviceBanner onOpenOrderModal={handleOpenOrderModal} />
 
         {/* 3x2 Bento Key Features Grid */}
         <Features />
@@ -70,21 +65,17 @@ export default function App() {
 
       </main>
 
-      {/* Footer — extra bottom room on phones so the dock never sits on the
-          legal text */}
-      <div className="pb-20 sm:pb-0 sm:pr-[5.5rem] lg:pr-24">
-        <Footer onOpenOrderModal={handleOpenOrderModal} />
-      </div>
+      <Footer onOpenOrderModal={handleOpenOrderModal} />
 
-      {/* Floating WhatsApp Contact — hidden on phones, where the bottom dock
-          already carries a WhatsApp button */}
-      <div className="hidden sm:block fixed bottom-6 left-6 z-40">
+      {/* Floating WhatsApp contact — on every screen now that the phone dock
+          which used to carry it is gone */}
+      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:left-6 sm:right-auto z-40">
         <a
           href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag meer weten over jullie IPTV-abonnementen.')}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Neem contact op via WhatsApp: ${WHATSAPP_DISPLAY}`}
-          className="p-3.5 rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/40 hover:scale-110 transition-transform duration-300 flex items-center justify-center border border-white/25"
+          className="p-3.5 rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/35 hover:scale-110 transition-transform duration-300 flex items-center justify-center border border-white/40"
           title={`WhatsApp-support 24/7 — ${WHATSAPP_DISPLAY}`}
         >
           <WhatsAppIcon className="w-6 h-6" />

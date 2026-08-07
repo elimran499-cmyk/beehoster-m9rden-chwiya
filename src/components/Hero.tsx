@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Sparkles, BadgeCheck } from 'lucide-react';
+import { Play, Sparkles } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { whatsAppLink } from '../data/contact';
 
@@ -51,7 +51,7 @@ const FilmPoster: React.FC<{ film: FilmCard; compact?: boolean; bare?: boolean; 
   const showArtwork = film.poster && !artworkFailed;
 
   return (
-  <div className="group relative w-full aspect-[2/3] rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl shadow-black/80 transition-all duration-500 hover:border-[#FF5C3A]/60 hover:shadow-[#FF5C3A]/20">
+  <div className="group relative w-full aspect-[2/3] rounded-2xl overflow-hidden border border-ink/10 bg-zinc-900 shadow-[0_18px_38px_-22px_rgba(22,21,15,0.55)] transition-all duration-500 hover:border-accent/60 hover:shadow-[0_22px_46px_-20px_rgba(159,18,57,0.5)]">
     {/* Poster Artwork */}
     {showArtwork ? (
       <img
@@ -84,7 +84,7 @@ const FilmPoster: React.FC<{ film: FilmCard; compact?: boolean; bare?: boolean; 
 
     {/* Quality Badge */}
     {film.badge && !compact && !bare && (
-      <span className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md border border-[#FF5C3A]/40 text-[9px] font-bold tracking-widest text-[#FFD166]">
+      <span className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md border border-accent/50 text-[9px] font-bold tracking-widest text-accent-lite">
         {film.badge}
       </span>
     )}
@@ -99,9 +99,9 @@ const FilmPoster: React.FC<{ film: FilmCard; compact?: boolean; bare?: boolean; 
     {/* Credits Block — only where the artwork doesn't already say it */}
     {!bare && (!showArtwork || compact) && (
     <div className={compact ? 'absolute inset-x-0 bottom-0 p-2.5' : 'absolute inset-x-0 bottom-0 p-3.5'}>
-      <div className={`h-px bg-[#FF5C3A] ${compact ? 'w-5 mb-1.5' : 'w-8 mb-2'}`} />
+      <div className={`h-px bg-accent-lite ${compact ? 'w-5 mb-1.5' : 'w-8 mb-2'}`} />
       <h3
-        className={`font-condensed uppercase leading-tight font-semibold text-white tracking-wide ${
+        className={`uppercase leading-tight font-semibold text-white tracking-wide ${
           compact ? 'text-[11px] line-clamp-2' : 'text-[15px]'
         }`}
       >
@@ -116,8 +116,8 @@ const FilmPoster: React.FC<{ film: FilmCard; compact?: boolean; bare?: boolean; 
   );
 };
 
-/* Phone showcase rail — posters at full strength drifting sideways so the
-   artwork is actually readable instead of orbiting past. The two tiers
+/* Full-bleed catalogue rail — posters at full strength drifting sideways so
+   the artwork stays readable instead of orbiting past. The two tiers
    ('front' captioned and large, 'back' small and dimmed) give the strip depth
    rather than two identical bands. */
 const PosterRail: React.FC<{
@@ -129,21 +129,24 @@ const PosterRail: React.FC<{
   const front = tier === 'front';
 
   return (
-    <div className={`mask-fade-x overflow-hidden ${front ? '' : 'opacity-55'}`}>
+    <div className={`mask-fade-x overflow-hidden ${front ? '' : 'opacity-60'}`}>
       <div
         className={direction === 'left' ? 'animate-marquee' : 'animate-marquee-reverse'}
         style={{ '--marquee-duration': duration } as React.CSSProperties}
       >
         {[...items, ...items].map((film, i) => (
-          <div key={`${film.id}-${i}`} className={`shrink-0 ${front ? 'w-[9.5rem] pr-3.5' : 'w-[5.5rem] pr-2.5'}`}>
+          <div
+            key={`${film.id}-${i}`}
+            className={`shrink-0 ${front ? 'w-[9.5rem] sm:w-[11rem] pr-3.5 sm:pr-4' : 'w-[5.5rem] sm:w-[6.5rem] pr-2.5 sm:pr-3'}`}
+          >
             {/* The duplicate half only exists for the seamless loop, so it can load lazily. */}
             <FilmPoster film={film} bare eager={front && i < items.length} />
             {front && (
               <>
-                <p className="mt-2.5 font-condensed uppercase text-[11px] leading-tight tracking-wide text-zinc-200 truncate">
+                <p className="mt-2.5 uppercase text-[11px] font-semibold leading-tight tracking-wide text-ink truncate">
                   {film.title}
                 </p>
-                <p className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-zinc-500 truncate">
+                <p className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-muted truncate">
                   {film.year} · {film.genre}
                 </p>
               </>
@@ -155,198 +158,117 @@ const PosterRail: React.FC<{
   );
 };
 
-/* A seamlessly looping column of posters (list rendered twice for the -50% loop). */
-const PosterColumn: React.FC<{ items: FilmCard[]; direction: 'up' | 'down'; duration: string; className?: string }> = ({
-  items,
-  direction,
-  duration,
-  className = '',
-}) => (
-  <div className={`flex-1 overflow-hidden ${className}`}>
-    <div
-      className={`flex flex-col gap-4 sm:gap-5 ${direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'}`}
-      style={{ '--scroll-duration': duration } as React.CSSProperties}
-    >
-      {[...items, ...items].map((film, i) => (
-        <FilmPoster key={`${film.id}-${i}`} film={film} />
-      ))}
+/* Centred editorial masthead. The old build ran a four-column scrolling film
+   wall down the right half and a blurred poster collage behind the type on
+   phones; both fought the copy for attention and neither survived the move to
+   a light page, where dark artwork behind text reads as dirt. The catalogue
+   now lives in one honest band below the fold line instead, and the column
+   above it is a single centred measure on every screen. */
+export const Hero: React.FC<HeroProps> = () => (
+  <section
+    id="hero"
+    className="relative overflow-hidden bg-page pt-28 sm:pt-32 lg:pt-36 pb-14 lg:pb-16"
+  >
+    {/* ── Backdrop: warm paper with a accent wash and faint light trails ─── */}
+    <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(115%_85%_at_50%_18%,#FFFFFF_0%,#FDF8EE_44%,#F7F1E4_74%,#F1E9DA_100%)]" />
+
+      <div className="absolute top-[18%] left-[8%] w-[34rem] h-px light-trail blur-[2px] opacity-60 -rotate-[14deg]" />
+      <div className="absolute top-[58%] right-[6%] w-[28rem] h-px light-trail blur-[3px] opacity-45 rotate-[11deg]" />
+
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[46rem] h-[34rem] bloom bloom-warm opacity-70" />
+      <div className="absolute top-[38%] -left-32 w-[32rem] h-[28rem] bloom bloom-ember opacity-50" />
+      <div className="absolute top-[30%] -right-28 w-[30rem] h-[26rem] bloom bloom-ember opacity-45" />
     </div>
-  </div>
+
+    {/* ── Centred copy column ──────────────────────────────────────────── */}
+    <div className="relative z-30 w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+      {/* Masthead. Instrument Serif runs tighter than the condensed poster
+          face it replaced, so the leading opens up and the tracking goes back
+          to normal — a serif this size doesn't want negative letter-spacing.
+          clamp() keeps it growing with the screen without blowing past 5.75rem
+          on a wide phone or collapsing on a 320px one. Both lines stay short
+          enough to hold on one line at 320px, and the figures live in the spec
+          strip below where they can be read rather than shouted. */}
+      <h1 className="font-display text-ink leading-[0.94] tracking-[-0.01em] text-[clamp(3.5rem,15vw,5.75rem)] lg:text-[6.5rem]">
+        <span className="block">Alle zenders.</span>
+        <span className="block italic accent-gradient-text">Nul gehaper.</span>
+      </h1>
+
+      {/* The one rule in the column, so the standfirst reads as a standfirst
+          rather than a stray line — centred now that the copy is. */}
+      <span aria-hidden="true" className="block mx-auto mt-7 w-16 h-px bg-accent/60" />
+
+      <p className="mt-6 text-[15px] sm:text-lg leading-relaxed text-muted max-w-xl mx-auto">
+        Live sport, films en series in 4K UHD — op je smart-tv, Firestick, telefoon of laptop.
+        Binnen vijf minuten actief, maandelijks opzegbaar.
+      </p>
+
+      {/* Action CTAs */}
+      <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center sm:justify-center gap-3">
+        <a
+          href="#pricing"
+          className="px-5 sm:px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-bold accent-button-gradient rounded-full shadow-[0_16px_34px_-16px_rgba(190,18,60,0.95)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+        >
+          <Sparkles className="w-4.5 h-4.5 shrink-0 fill-current group-hover:rotate-12 transition-transform" />
+          <span className="whitespace-nowrap">Abonnement nemen</span>
+          <span className="shrink-0 bg-ink/15 px-1.5 sm:px-2 py-0.5 rounded-lg text-[9px] sm:text-[10px] tracking-wider uppercase font-extrabold">
+            Bespaar 55%
+          </span>
+        </a>
+
+        <a
+          href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag een IPTV-abonnement bestellen.')}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-semibold text-ink glass-panel rounded-full hover:border-[#25D366]/60 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5"
+        >
+          <WhatsAppIcon className="w-4.5 h-4.5 text-[#25D366]" />
+          <span>Bestel via WhatsApp</span>
+        </a>
+      </div>
+
+      {/* Spec strip */}
+      <div className="mt-10 grid grid-cols-3 divide-x divide-line rounded-2xl border border-line bg-surface/70 backdrop-blur-sm py-4 max-w-lg mx-auto">
+        {[
+          { value: '80.000+', label: 'Zenders' },
+          { value: '200.000+', label: 'Films & series' },
+          { value: '99,99%', label: 'Uptime' },
+        ].map((stat) => (
+          <div key={stat.label} className="px-2">
+            <p className="font-display text-[1.5rem] lg:text-[1.75rem] leading-none accent-gradient-text">
+              {stat.value}
+            </p>
+            <p className="mt-1.5 uppercase text-[9px] font-semibold tracking-[0.2em] text-muted">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* ── Full-bleed catalogue band ────────────────────────────────────── */}
+    <div className="relative z-20 mt-12 sm:mt-16 pt-8 border-t border-line">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-baseline justify-between gap-4 mb-5">
+          <span className="flex items-center gap-2 uppercase text-[11px] font-semibold tracking-[0.3em] text-accent-deep">
+            <span className="flex h-1.5 w-1.5 relative shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+            </span>
+            Nu te zien
+          </span>
+          <span className="uppercase text-[10px] font-semibold tracking-[0.18em] text-muted">
+            4K · HDR · Atmos
+          </span>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <PosterRail items={films.slice(0, 8)} direction="left" duration="58s" tier="front" />
+        <PosterRail items={films.slice(8, 16)} direction="right" duration="74s" tier="back" />
+      </div>
+    </div>
+  </section>
 );
-
-export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
-  const colA = films.slice(0, 4);
-  const colB = films.slice(4, 8);
-  const colC = films.slice(8, 12);
-  const colD = films.slice(12, 16);
-
-  return (
-    <section
-      id="hero"
-      className="relative overflow-hidden bg-pitch-black pt-20 sm:pt-24 lg:pt-28 pb-14 lg:pb-16 flex items-center"
-    >
-      {/* ── Dimensional Backdrop: sapphire depth, drifting panels, light trails ── */}
-      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Near-black to dark sapphire */}
-        <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_62%_42%,#3B1024_0%,#23091A_45%,#180712_72%,#100509_100%)]" />
-
-        {/* Abstract blurred UI panels, far back */}
-        <div className="hidden lg:block absolute top-[14%] left-[26%] w-72 h-44 rounded-3xl glass-card opacity-25 blur-[7px] -rotate-6" />
-        <div className="hidden lg:block absolute top-[54%] left-[19%] w-56 h-32 rounded-3xl glass-card opacity-20 blur-[9px] rotate-3" />
-        <div className="hidden lg:block absolute top-[30%] left-[58%] w-64 h-40 rounded-3xl glass-card opacity-[0.14] blur-[11px] rotate-[7deg]" />
-        <div className="hidden lg:flex absolute top-[70%] left-[34%] w-40 h-12 rounded-full glass-card opacity-25 blur-[5px] -rotate-3 items-center gap-2 px-4">
-          <span className="w-3 h-3 rounded-full border-2 border-white/50" />
-          <span className="h-1.5 flex-1 rounded-full bg-white/25" />
-        </div>
-
-        {/* Distant glowing light trails */}
-        <div className="absolute top-[22%] left-[12%] w-[34rem] h-px light-trail blur-[2px] opacity-45 -rotate-[17deg]" />
-        <div className="absolute top-[63%] left-[24%] w-[28rem] h-px light-trail blur-[3px] opacity-35 -rotate-[12deg]" />
-        <div className="absolute top-[41%] left-[46%] w-[22rem] h-px light-trail blur-[2px] opacity-30 rotate-[9deg]" />
-
-        {/* Ambient blooms */}
-        <div className="lg:hidden absolute -top-20 -left-24 w-[26rem] h-[24rem] bloom bloom-warm opacity-40" />
-        <div className="lg:hidden absolute top-[42%] -right-28 w-[24rem] h-[22rem] bloom bloom-ember opacity-45" />
-        <div className="absolute top-1/4 -left-32 w-[620px] h-[560px] aurora-soft opacity-70" />
-        <div className="absolute -bottom-32 left-1/4 w-[520px] h-[420px] aurora opacity-40" />
-      </div>
-
-      {/* ── MOBILE: out-of-focus poster corner behind the masthead. A still
-             collage rather than three animated, blurred columns — at this
-             opacity the motion never read, it only cost the phone 24 moving
-             blurred images. The sharp artwork lives in the rail below. ─── */}
-      <div aria-hidden="true" className="lg:hidden absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-24 -right-12 w-[68%] grid grid-cols-2 gap-3 rotate-[7deg] opacity-[0.11] blur-[10px]">
-          {films.slice(0, 4).map((film) => (
-            <div key={film.id} className={`aspect-[2/3] rounded-2xl overflow-hidden bg-gradient-to-b ${film.gradient}`}>
-              {film.poster && (
-                <img src={film.poster} alt="" loading="lazy" className="w-full h-full object-cover" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Scrim so the type always sits on a settled field */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#14070F]/75 via-[#14070F]/92 to-[#14070F]" />
-        <div className="absolute inset-0 film-grain opacity-[0.07] mix-blend-overlay" />
-      </div>
-
-      {/* ── RIGHT: Full-Bleed Film Wall (in front of the 3D elements) ─ */}
-      <div className="film-wall hidden lg:block absolute inset-y-0 right-0 w-[53%] xl:w-[52%] z-[3]">
-        <div className="absolute inset-0 flex gap-4 px-4 -rotate-[3deg] scale-[1.12]">
-          <PosterColumn items={colA} direction="up" duration="60s" />
-          <PosterColumn items={colB} direction="down" duration="72s" className="mt-[-5rem]" />
-          <PosterColumn items={colC} direction="up" duration="52s" className="mt-[-2rem]" />
-          <PosterColumn items={colD} direction="down" duration="66s" className="hidden xl:block mt-[-7rem]" />
-        </div>
-        {/* Soft edge blend on both sides of the wall */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#14070F]/60 via-transparent to-[#14070F]/60 pointer-events-none" />
-      </div>
-
-      {/* ── LEFT: Editorial Copy Block ────────────────────────────── */}
-      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Phones read this as an editorial page, not a centred template: one
-            hard left edge that the kicker, masthead, rule and buttons all
-            share. */}
-        <div className="text-left lg:w-[46%] lg:pl-20">
-          {/* Official-site marker. Clones and resellers are the norm in this
-              market, so the badge names the one channel we actually answer on. */}
-          <div className="inline-flex items-center gap-2.5 mb-4 px-3 py-1.5 rounded-full border border-[#FFE600]/45 bg-[#FFE600]/10">
-            <BadgeCheck className="w-4 h-4 shrink-0 text-[#FFE600]" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] text-[#FFE9A8]">
-              Officiële BEEHOSTER-website
-            </span>
-          </div>
-
-          {/* Masthead Headline */}
-          {/* Two stacked lines, same treatment on every screen. The line-height
-              stays at 0.92 so the Anton ascenders can't ride up into the
-              kicker above them. */}
-          {/* clamp() instead of a raw vw size: the type keeps growing with the
-              screen but can't blow past 5rem on a wide phone or shrink to
-              nothing on a 320px one — and there's no size cliff at `sm`. */}
-          <h1 className="relative z-10 font-display uppercase text-white leading-[0.88] tracking-tight text-[clamp(3.5rem,17vw,5.5rem)] lg:text-[5rem] xl:text-[5.8rem]">
-            <span className="block drop-shadow-[0_6px_28px_rgba(0,0,0,0.9)]">80.000+</span>
-            <span className="block accent-gradient-text drop-shadow-[0_6px_28px_rgba(0,0,0,0.55)]">Zenders</span>
-          </h1>
-
-          {/* Serif Standfirst */}
-          {/* Same accent rule on every screen — it's the one indent in the
-              column, so it reads as a standfirst rather than a stray line. */}
-          <p className="mt-6 sm:mt-7 font-editorial text-base sm:text-xl leading-relaxed text-zinc-300 max-w-lg border-l border-[#FF5C3A]/40 pl-4 lg:pl-5">
-            Geen buffering, Anti-Freeze™ 9.0-servertechnologie en activatie binnen 5 minuten op Firestick, smart-tv,
-            Android en iOS. Alle sport, film &amp; PPV inbegrepen.
-          </p>
-
-          {/* Action CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <a
-              href="#pricing"
-              className="px-5 sm:px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-bold text-black accent-button-gradient rounded-full shadow-xl shadow-[#FF5C3A]/25 hover:shadow-[#FF5C3A]/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
-            >
-              <Sparkles className="w-4.5 h-4.5 shrink-0 fill-black group-hover:rotate-12 transition-transform" />
-              {/* Narrow phones drop "Now" so the discount chip never gets squeezed. */}
-              <span className="whitespace-nowrap">Abonnement nemen</span>
-              <span className="shrink-0 bg-black/20 px-1.5 sm:px-2 py-0.5 rounded-lg text-[9px] sm:text-[10px] tracking-wider uppercase font-extrabold">
-                Bespaar 55%
-              </span>
-            </a>
-
-            <a
-              href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag een IPTV-abonnement bestellen.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative px-7 py-[1.1rem] sm:py-4 text-[15px] sm:text-sm font-semibold text-zinc-100 glass-panel glass-edge rounded-full hover:border-[#25D366]/70 hover:text-white active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5"
-            >
-              <WhatsAppIcon className="w-4.5 h-4.5 text-[#25D366]" />
-              <span>Bestel via WhatsApp</span>
-            </a>
-          </div>
-
-          {/* Spec strip — every screen now, since the vertical "200.000+ films"
-              lettering that used to carry the catalogue size on desktop is
-              gone. It sits inside the copy column so it stays clear of the
-              film wall. */}
-          <div className="mt-8 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.035] py-4 lg:max-w-md">
-            {[
-              { value: '80.000+', label: 'Zenders' },
-              { value: '200.000+', label: 'Films & series' },
-              { value: '99,99%', label: 'Uptime' },
-            ].map((stat) => (
-              <div key={stat.label} className="px-2 text-center">
-                <p className="font-display text-[1.35rem] lg:text-[1.6rem] leading-none tracking-tight accent-gradient-text">
-                  {stat.value}
-                </p>
-                <p className="mt-1.5 font-condensed uppercase text-[9px] tracking-[0.2em] text-zinc-400">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-        {/* ── MOBILE: full-bleed catalogue rails ───────────────────── */}
-        <div className="lg:hidden mt-10 pt-7 border-t border-white/10">
-          <div className="flex items-baseline justify-between gap-4 mb-4">
-            <span className="flex items-center gap-2 font-condensed uppercase text-[11px] tracking-[0.3em] text-[#FFD166]">
-              <span className="flex h-1.5 w-1.5 relative shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5C3A] opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF5C3A]" />
-              </span>
-              Nu te zien
-            </span>
-            <span className="font-condensed uppercase text-[10px] tracking-[0.18em] text-zinc-500">
-              4K · HDR · Atmos
-            </span>
-          </div>
-
-          <div className="-mx-4 sm:-mx-6 space-y-4">
-            <PosterRail items={films.slice(0, 8)} direction="left" duration="52s" tier="front" />
-            <PosterRail items={films.slice(8, 16)} direction="right" duration="68s" tier="back" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};

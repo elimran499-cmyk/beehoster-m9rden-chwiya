@@ -7,16 +7,17 @@ interface ChannelExplorerProps {
   onOpenOrderModal: (planId?: string) => void;
 }
 
-/* Generated monogram logo — a small color-coded wordmark tile so every channel
-   has a "logo" without pulling in real broadcaster artwork. Colors cycle
-   through the accent palette based on the channel id. */
+/* Generated monogram logo — a small colour-coded wordmark tile so every channel
+   has a "logo" without pulling in real broadcaster artwork. The ramp stays
+   inside the accent family with two cooler outliers for variety; every stop is
+   light enough to carry the ink monogram set on top of it. */
 const LOGO_GRADIENTS = [
-  'from-[#FF5C3A] to-[#FF9A2E]',
-  'from-[#FFD166] to-[#FF5C3A]',
-  'from-[#FF3D8B] to-[#FF5C3A]',
-  'from-[#A855F7] to-[#FF3D8B]',
-  'from-[#22D3EE] to-[#A855F7]',
-  'from-[#FF9A2E] to-[#FFD166]',
+  'from-[#E11D48] to-[#D98324]',
+  'from-[#F9A8C0] to-[#E11D48]',
+  'from-[#E9A178] to-[#D97757]',
+  'from-[#C3B5E3] to-[#9C8AD1]',
+  'from-[#9FD3D8] to-[#6FB3BC]',
+  'from-[#E8C86A] to-[#BE123C]',
 ];
 
 const ChannelLogo: React.FC<{ channel: ChannelItem; className?: string; textClassName?: string }> = ({
@@ -33,7 +34,7 @@ const ChannelLogo: React.FC<{ channel: ChannelItem; className?: string; textClas
     return (
       <span
         className={`relative flex items-center justify-center overflow-hidden shrink-0 border ${
-          channel.logoTone === 'light' ? 'bg-black/80 border-white/25' : 'bg-white border-white/40'
+          channel.logoTone === 'light' ? 'bg-ink/85 border-ink/20' : 'bg-white border-line'
         } ${className}`}
       >
         <img
@@ -51,9 +52,9 @@ const ChannelLogo: React.FC<{ channel: ChannelItem; className?: string; textClas
   const gradient = LOGO_GRADIENTS[Number(channel.id) % LOGO_GRADIENTS.length];
   return (
     <span
-      className={`relative bg-gradient-to-br ${gradient} border border-white/15 flex items-center justify-center overflow-hidden shrink-0 ${className}`}
+      className={`relative bg-gradient-to-br ${gradient} border border-line flex items-center justify-center overflow-hidden shrink-0 ${className}`}
     >
-      <span className={`font-display uppercase tracking-tight text-black ${textClassName}`}>
+      <span className={`font-display uppercase tracking-tight text-ink ${textClassName}`}>
         {channel.logoText}
       </span>
       <span className="absolute -bottom-1 -right-1 text-[10px] leading-none drop-shadow">{channel.flag}</span>
@@ -84,13 +85,13 @@ export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderMod
         
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs font-bold text-[#FFD166] uppercase tracking-widest bg-[#FF5C3A]/10 px-3.5 py-1 rounded-full border border-[#FF5C3A]/30">
+          <span className="text-xs font-bold text-accent-deep uppercase tracking-widest bg-accent-soft px-3.5 py-1 rounded-full border border-accent/35">
             80.000+ LIVE ZENDERS & 95.000+ VOD
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl text-ink leading-[1.06]">
             Ontdek ons <span className="accent-gradient-text">complete zender- en film</span>aanbod
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-400">
+          <p className="mt-3 text-sm sm:text-base text-muted">
             Elke zender streamt in origineel 4K Ultra HD en 60FPS, zonder compressie.
           </p>
         </div>
@@ -119,14 +120,14 @@ export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderMod
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Bottom Banner */}
-        <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-zinc-900 via-[#1F0D18] to-zinc-900 border border-[#FF5C3A]/30 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-accent-soft via-surface to-accent-soft border border-accent/35 shadow-[0_20px_46px_-28px_rgba(159,18,57,0.4)] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="p-3.5 rounded-2xl bg-[#FF5C3A]/20 text-[#FFD166] border border-[#FF5C3A]/40 shrink-0">
-              <Radio className="w-6 h-6 animate-pulse text-[#FF5C3A]" />
+            <div className="p-3.5 rounded-2xl bg-accent/15 text-accent-deep border border-accent/45 shrink-0">
+              <Radio className="w-6 h-6 animate-pulse text-accent" />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-white">Zoek je een zenderlijst per land of het PPV-programma?</h4>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
+              <h4 className="text-lg font-bold text-ink">Zoek je een zenderlijst per land of het PPV-programma?</h4>
+              <p className="text-xs sm:text-sm text-muted mt-0.5">
                 Wij stellen M3U-playlists op maat samen voor Nederlandse, Belgische, Duitse, Franse, Britse, Amerikaanse, Spaanse, Turkse, Arabische en Latijnse zenders.
               </p>
             </div>
@@ -134,9 +135,9 @@ export const ChannelExplorer: React.FC<ChannelExplorerProps> = ({ onOpenOrderMod
 
           <button
             onClick={() => onOpenOrderModal('plan-12m')}
-            className="shrink-0 px-6 py-3 text-xs font-bold text-black accent-button-gradient rounded-xl shadow-lg shadow-[#FF5C3A]/20 hover:scale-105 transition-all flex items-center gap-2"
+            className="shrink-0 px-6 py-3 text-xs font-bold accent-button-gradient rounded-xl shadow-lg shadow-accent/30 hover:scale-105 transition-all flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4 fill-black" />
+            <Sparkles className="w-4 h-4 fill-current" />
             <span>Vraag de volledige zenderlijst aan</span>
           </button>
         </div>
