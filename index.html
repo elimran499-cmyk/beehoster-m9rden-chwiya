@@ -88,9 +88,14 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Fonts are self-hosted from /public/fonts — see the @font-face block in
+         src/index.css. Preloading the three latin cuts the first screen
+         actually paints with (Inter for the UI, Instrument Serif roman and
+         italic for the masthead) starts them on the document's own warm
+         connection instead of waiting for the stylesheet to be parsed. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/instrument-serif-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/instrument-serif-italic-latin.woff2" crossorigin>
   </head>
   <body class="bg-[#FAF7F2] text-[#16150F] font-['Inter',sans-serif] antialiased selection:bg-[#BE123C] selection:text-white overflow-x-hidden">
     <div id="root"></div>
