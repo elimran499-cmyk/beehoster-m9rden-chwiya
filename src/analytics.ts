@@ -26,7 +26,7 @@ const WHATSAPP_HREF = 'a[href*="wa.me/"]';
  * event_callback dance Google prescribes for same-tab outbound links.
  *
  * This is delegated from the document rather than bolted onto each of the
- * eleven anchors: they are spread over seven components, and a new CTA should
+ * twelve anchors: they are spread over seven components, and a new CTA should
  * be counted because it points at WhatsApp, not because someone remembered to
  * wire up an onClick. Returns its own teardown.
  */
@@ -40,7 +40,12 @@ export function trackWhatsAppClicks(): () => void {
   };
 
   // Capture phase, so a handler that stops propagation can't silently cost us
-  // the conversion.
+  // the conversion. 'auxclick' rides along because a middle-click opens the
+  // chat just as well as a left-click but never fires 'click'.
   document.addEventListener('click', onClick, true);
-  return () => document.removeEventListener('click', onClick, true);
+  document.addEventListener('auxclick', onClick, true);
+  return () => {
+    document.removeEventListener('click', onClick, true);
+    document.removeEventListener('auxclick', onClick, true);
+  };
 }
