@@ -1,10 +1,20 @@
 import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+import {createRoot, hydrateRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!;
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 );
+
+// A production build ships prerendered markup inside #root (see
+// scripts/prerender.mjs), so adopt it rather than throwing it away. The dev
+// server serves an empty root and takes the createRoot path.
+if (container.firstChild) {
+  hydrateRoot(container, app);
+} else {
+  createRoot(container).render(app);
+}
