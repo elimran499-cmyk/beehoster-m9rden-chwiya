@@ -123,7 +123,7 @@ export const ChannelExplorer: React.FC = () => {
               <Radio className="w-6 h-6 animate-pulse text-accent" />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-ink">Zoek je een zenderlijst per land of het PPV-programma?</h4>
+              <h4 className="text-lg font-bold text-ink">Zoek je de volledige zenderlijst of het PPV-programma?</h4>
               <p className="text-xs sm:text-sm text-muted mt-0.5">
                 Wij stellen M3U-playlists op maat samen met alle Nederlandse zenders: NPO, RTL, SBS, Talpa, Ziggo Sport, ESPN en Viaplay.
               </p>

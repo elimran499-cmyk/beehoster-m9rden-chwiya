@@ -164,22 +164,22 @@ export const FEATURE_GRID = [
 ];
 
 export const SAMPLE_CHANNELS: ChannelItem[] = [
-  { id: '1', name: 'NPO 1 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO1', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/NPO_1_logo_2014.svg/250px-NPO_1_logo_2014.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '2', name: 'NPO 2 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO2', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/NPO_2_logo_2014.svg/250px-NPO_2_logo_2014.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '3', name: 'NPO 3 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO3', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/NPO_3_logo_2018.svg/250px-NPO_3_logo_2018.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '4', name: 'RTL 4 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL4', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/RTL_4_Logo_2016.svg/250px-RTL_4_Logo_2016.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '5', name: 'RTL 5 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL5', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/RTL_5_Logo_2017.svg/250px-RTL_5_Logo_2017.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '6', name: 'RTL 7 HD', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL7', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/RTL_7_Logo.svg/250px-RTL_7_Logo.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '7', name: 'RTL 8 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL8', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/RTL_8_Logo_2017.svg/250px-RTL_8_Logo_2017.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '8', name: 'SBS6 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'SBS6', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/SBS6_%282023%29_orange.png', logoTone: 'dark', epgAvailable: true },
-  { id: '9', name: 'Net5 HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NET5', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Net5_Logo_2023.jpg/250px-Net5_Logo_2023.jpg', logoTone: 'dark', epgAvailable: true },
-  { id: '10', name: 'Veronica HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VERO', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Veronica_TV_logo_2024.svg/250px-Veronica_TV_logo_2024.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '11', name: 'RTL Z HD', category: 'Nederland', quality: 'FHD', flag: '🇳🇱', logoText: 'RTLZ', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/RTL_Z_Logo_2015.svg/250px-RTL_Z_Logo_2015.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '12', name: 'Ziggo Sport Select 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ZIG', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Ziggo_Sport_logo_2026.svg/250px-Ziggo_Sport_logo_2026.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '13', name: 'ESPN 1 Eredivisie 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ESPN', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/250px-ESPN_wordmark.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '14', name: 'Viaplay Nederland', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VP', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Viaplay_TV_logo.svg/250px-Viaplay_TV_logo.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '15', name: 'Discovery Channel NL', category: 'Documentaires', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'DISC', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Discovery_Channel_-_Logo_2019.svg/250px-Discovery_Channel_-_Logo_2019.svg.png', logoTone: 'dark', epgAvailable: true },
-  { id: '16', name: 'NPO Zapp', category: 'Kids', quality: 'FHD', flag: '🇳🇱', logoText: 'ZAPP', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/NPO_Zapp_logo_2023.svg/250px-NPO_Zapp_logo_2023.svg.png', logoTone: 'dark', epgAvailable: true },
+  { id: '1', name: 'NPO 1 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO1', logo: '/logos/npo-1-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '2', name: 'NPO 2 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO2', logo: '/logos/npo-2-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '3', name: 'NPO 3 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO3', logo: '/logos/npo-3-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '4', name: 'RTL 4 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL4', logo: '/logos/rtl-4-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '5', name: 'RTL 5 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL5', logo: '/logos/rtl-5-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '6', name: 'RTL 7 HD', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL7', logo: '/logos/rtl-7-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '7', name: 'RTL 8 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL8', logo: '/logos/rtl-8-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '8', name: 'SBS6 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'SBS6', logo: '/logos/sbs6-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '9', name: 'Net5 HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NET5', logo: '/logos/net5-hd.jpg', logoTone: 'dark', epgAvailable: true },
+  { id: '10', name: 'Veronica HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VERO', logo: '/logos/veronica-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '11', name: 'RTL Z HD', category: 'Nederland', quality: 'FHD', flag: '🇳🇱', logoText: 'RTLZ', logo: '/logos/rtl-z-hd.png', logoTone: 'dark', epgAvailable: true },
+  { id: '12', name: 'Ziggo Sport Select 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ZIG', logo: '/logos/ziggo-sport-select-4k.png', logoTone: 'dark', epgAvailable: true },
+  { id: '13', name: 'ESPN 1 Eredivisie 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ESPN', logo: '/logos/espn-1-eredivisie-4k.png', logoTone: 'dark', epgAvailable: true },
+  { id: '14', name: 'Viaplay Nederland', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VP', logo: '/logos/viaplay-nederland.png', logoTone: 'dark', epgAvailable: true },
+  { id: '15', name: 'Discovery Channel NL', category: 'Documentaires', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'DISC', logo: '/logos/discovery-channel-nl.png', logoTone: 'dark', epgAvailable: true },
+  { id: '16', name: 'NPO Zapp', category: 'Kids', quality: 'FHD', flag: '🇳🇱', logoText: 'ZAPP', logo: '/logos/npo-zapp.png', logoTone: 'dark', epgAvailable: true },
 ];
 
 

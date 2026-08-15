@@ -18,22 +18,22 @@ interface FilmCard {
 /* VOD wall. `poster` holds the artwork URL; the gradient/glow pair stays as the
    fallback that renders if an image fails to load. */
 const films: FilmCard[] = [
-  { id: 'f1', title: 'Dune: Part Two', year: '2024', genre: 'Sci-Fi Epic', poster: 'https://upload.wikimedia.org/wikipedia/en/5/52/Dune_Part_Two_poster.jpeg', gradient: 'from-orange-600/60 via-[#2A0B08] to-black', glow: 'rgba(255,122,60,0.62)', badge: 'DOLBY VISION' },
-  { id: 'f2', title: 'Oppenheimer', year: '2023', genre: 'Drama', poster: 'https://upload.wikimedia.org/wikipedia/en/4/4a/Oppenheimer_%28film%29.jpg', gradient: 'from-amber-600/55 via-[#251005] to-black', glow: 'rgba(255,154,46,0.5)' },
-  { id: 'f3', title: 'The Batman', year: '2022', genre: 'Crime Thriller', poster: 'https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg', gradient: 'from-rose-700/55 via-[#22060F] to-black', glow: 'rgba(255,61,139,0.48)', badge: '4K HDR' },
-  { id: 'f4', title: 'Interstellar', year: '2014', genre: 'Space Odyssey', poster: 'https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg', gradient: 'from-red-700/50 via-[#210708] to-black', glow: 'rgba(239,68,68,0.45)' },
-  { id: 'f5', title: 'Blade Runner 2049', year: '2017', genre: 'Neo Noir', poster: 'https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png', gradient: 'from-yellow-600/50 via-[#231604] to-black', glow: 'rgba(255,209,102,0.5)', badge: 'ATMOS' },
-  { id: 'f6', title: 'Top Gun: Maverick', year: '2022', genre: 'Action', poster: 'https://upload.wikimedia.org/wikipedia/en/1/13/Top_Gun_Maverick_Poster.jpg', gradient: 'from-fuchsia-700/50 via-[#1E0620] to-black', glow: 'rgba(217,70,239,0.42)' },
-  { id: 'f7', title: 'John Wick 4', year: '2023', genre: 'Action', poster: 'https://upload.wikimedia.org/wikipedia/en/d/d0/John_Wick_-_Chapter_4_promotional_poster.jpg', gradient: 'from-orange-700/55 via-[#240C05] to-black', glow: 'rgba(234,88,12,0.5)', badge: '60 FPS' },
-  { id: 'f8', title: 'Joker', year: '2019', genre: 'Psych. Thriller', poster: 'https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg', gradient: 'from-pink-700/50 via-[#20070F] to-black', glow: 'rgba(255,61,139,0.44)' },
-  { id: 'f9', title: 'Avatar: The Way of Water', year: '2022', genre: 'Sci-Fi Epic', poster: 'https://upload.wikimedia.org/wikipedia/en/5/54/Avatar_The_Way_of_Water_poster.jpg', gradient: 'from-amber-700/55 via-[#221104] to-black', glow: 'rgba(245,158,11,0.5)', badge: '4K HDR' },
-  { id: 'f10', title: 'Gladiator II', year: '2024', genre: 'Historical', poster: 'https://upload.wikimedia.org/wikipedia/en/0/04/Gladiator_II_%282024%29_poster.jpg', gradient: 'from-stone-600/50 via-[#1A1210] to-black', glow: 'rgba(214,211,209,0.3)' },
-  { id: 'f11', title: 'Tenet', year: '2020', genre: 'Thriller', poster: 'https://upload.wikimedia.org/wikipedia/en/1/14/Tenet_movie_poster.jpg', gradient: 'from-rose-800/55 via-[#1E060C] to-black', glow: 'rgba(225,29,72,0.46)' },
-  { id: 'f12', title: 'Sicario', year: '2015', genre: 'Crime', poster: 'https://upload.wikimedia.org/wikipedia/en/4/4b/Sicario_poster.jpg', gradient: 'from-orange-800/50 via-[#200A04] to-black', glow: 'rgba(194,65,12,0.45)', badge: 'ATMOS' },
-  { id: 'f13', title: 'Deadpool & Wolverine', year: '2024', genre: 'Action Comedy', poster: 'https://upload.wikimedia.org/wikipedia/en/4/4c/Deadpool_%26_Wolverine_poster.jpg', gradient: 'from-red-600/50 via-[#280708] to-black', glow: 'rgba(255,74,43,0.52)', badge: '4K HDR' },
-  { id: 'f14', title: 'Inception', year: '2010', genre: 'Sci-Fi', poster: 'https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg', gradient: 'from-yellow-700/45 via-[#1F1503] to-black', glow: 'rgba(202,138,4,0.4)' },
-  { id: 'f15', title: 'Furiosa', year: '2024', genre: 'Post-Apocalyptic', poster: 'https://upload.wikimedia.org/wikipedia/en/3/34/Furiosa_A_Mad_Max_Saga.jpg', gradient: 'from-orange-500/55 via-[#2B1206] to-black', glow: 'rgba(255,154,46,0.55)', badge: '60 FPS' },
-  { id: 'f16', title: 'The Dark Knight', year: '2008', genre: 'Crime Thriller', poster: 'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg', gradient: 'from-fuchsia-800/50 via-[#1C0619] to-black', glow: 'rgba(192,38,211,0.45)' },
+  { id: 'f1', title: 'Dune: Part Two', year: '2024', genre: 'Sci-Fi Epic', poster: '/posters/f1.jpg', gradient: 'from-orange-600/60 via-[#2A0B08] to-black', glow: 'rgba(255,122,60,0.62)', badge: 'DOLBY VISION' },
+  { id: 'f2', title: 'Oppenheimer', year: '2023', genre: 'Drama', poster: '/posters/f2.jpg', gradient: 'from-amber-600/55 via-[#251005] to-black', glow: 'rgba(255,154,46,0.5)' },
+  { id: 'f3', title: 'The Batman', year: '2022', genre: 'Crime Thriller', poster: '/posters/f3.jpg', gradient: 'from-rose-700/55 via-[#22060F] to-black', glow: 'rgba(255,61,139,0.48)', badge: '4K HDR' },
+  { id: 'f4', title: 'Interstellar', year: '2014', genre: 'Space Odyssey', poster: '/posters/f4.jpg', gradient: 'from-red-700/50 via-[#210708] to-black', glow: 'rgba(239,68,68,0.45)' },
+  { id: 'f5', title: 'Blade Runner 2049', year: '2017', genre: 'Neo Noir', poster: '/posters/f5.jpg', gradient: 'from-yellow-600/50 via-[#231604] to-black', glow: 'rgba(255,209,102,0.5)', badge: 'ATMOS' },
+  { id: 'f6', title: 'Top Gun: Maverick', year: '2022', genre: 'Action', poster: '/posters/f6.jpg', gradient: 'from-fuchsia-700/50 via-[#1E0620] to-black', glow: 'rgba(217,70,239,0.42)' },
+  { id: 'f7', title: 'John Wick 4', year: '2023', genre: 'Action', poster: '/posters/f7.jpg', gradient: 'from-orange-700/55 via-[#240C05] to-black', glow: 'rgba(234,88,12,0.5)', badge: '60 FPS' },
+  { id: 'f8', title: 'Joker', year: '2019', genre: 'Psych. Thriller', poster: '/posters/f8.jpg', gradient: 'from-pink-700/50 via-[#20070F] to-black', glow: 'rgba(255,61,139,0.44)' },
+  { id: 'f9', title: 'Avatar: The Way of Water', year: '2022', genre: 'Sci-Fi Epic', poster: '/posters/f9.jpg', gradient: 'from-amber-700/55 via-[#221104] to-black', glow: 'rgba(245,158,11,0.5)', badge: '4K HDR' },
+  { id: 'f10', title: 'Gladiator II', year: '2024', genre: 'Historical', poster: '/posters/f10.jpg', gradient: 'from-stone-600/50 via-[#1A1210] to-black', glow: 'rgba(214,211,209,0.3)' },
+  { id: 'f11', title: 'Tenet', year: '2020', genre: 'Thriller', poster: '/posters/f11.jpg', gradient: 'from-rose-800/55 via-[#1E060C] to-black', glow: 'rgba(225,29,72,0.46)' },
+  { id: 'f12', title: 'Sicario', year: '2015', genre: 'Crime', poster: '/posters/f12.jpg', gradient: 'from-orange-800/50 via-[#200A04] to-black', glow: 'rgba(194,65,12,0.45)', badge: 'ATMOS' },
+  { id: 'f13', title: 'Deadpool & Wolverine', year: '2024', genre: 'Action Comedy', poster: '/posters/f13.jpg', gradient: 'from-red-600/50 via-[#280708] to-black', glow: 'rgba(255,74,43,0.52)', badge: '4K HDR' },
+  { id: 'f14', title: 'Inception', year: '2010', genre: 'Sci-Fi', poster: '/posters/f14.jpg', gradient: 'from-yellow-700/45 via-[#1F1503] to-black', glow: 'rgba(202,138,4,0.4)' },
+  { id: 'f15', title: 'Furiosa', year: '2024', genre: 'Post-Apocalyptic', poster: '/posters/f15.jpg', gradient: 'from-orange-500/55 via-[#2B1206] to-black', glow: 'rgba(255,154,46,0.55)', badge: '60 FPS' },
+  { id: 'f16', title: 'The Dark Knight', year: '2008', genre: 'Crime Thriller', poster: '/posters/f16.jpg', gradient: 'from-fuchsia-800/50 via-[#1C0619] to-black', glow: 'rgba(192,38,211,0.45)' },
 ];
 
 /* One generated poster tile — layered gradient art, grain, and editorial credits block. */

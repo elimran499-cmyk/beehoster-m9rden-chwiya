@@ -4,14 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18345460239"></script>
+    <!-- Google tag (gtag.js).
+         The stub runs inline and immediately: it defines gtag() and queues every
+         call into dataLayer, so conversions fired before the remote tag lands are
+         kept and replayed. That lets the 100 KB gtag.js itself wait — as the very
+         first element in <head> the preload scanner used to fetch it ahead of the
+         fonts and the app bundle, spending the opening round-trips of the visit on
+         a script that paints nothing. It is pulled in on whichever comes first:
+         window load, or the first sign of a user who might convert. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'AW-18345460239');
+
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18345460239';
+          document.head.appendChild(s);
+        }
+        var events = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+        events.forEach(function (e) {
+          window.addEventListener(e, loadGtag, {once: true, passive: true, capture: true});
+        });
+        if (document.readyState === 'complete') loadGtag();
+        else window.addEventListener('load', loadGtag, {once: true});
+      })();
     </script>
 
     <title>BEEHOSTER — Officiële website | 80.000+ live tv-zenders & VOD in 4K UHD</title>
