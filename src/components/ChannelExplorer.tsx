@@ -86,10 +86,10 @@ export const ChannelExplorer: React.FC = () => {
             80.000+ LIVE ZENDERS & 95.000+ VOD
           </span>
           <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl text-ink leading-[1.06]">
-            Ontdek ons <span className="accent-gradient-text">complete zender- en film</span>aanbod
+            Ontdek ons <span className="accent-gradient-text">complete Nederlandse zender</span>aanbod
           </h2>
           <p className="mt-3 text-sm sm:text-base text-muted">
-            Elke zender streamt in origineel 4K Ultra HD en 60FPS, zonder compressie.
+            Alle Nederlandse zenders in origineel 4K Ultra HD en 60FPS, zonder compressie.
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export const ChannelExplorer: React.FC = () => {
             <div>
               <h4 className="text-lg font-bold text-ink">Zoek je een zenderlijst per land of het PPV-programma?</h4>
               <p className="text-xs sm:text-sm text-muted mt-0.5">
-                Wij stellen M3U-playlists op maat samen voor Nederlandse, Belgische, Duitse, Franse, Britse, Amerikaanse, Spaanse, Turkse, Arabische en Latijnse zenders.
+                Wij stellen M3U-playlists op maat samen met alle Nederlandse zenders: NPO, RTL, SBS, Talpa, Ziggo Sport, ESPN en Viaplay.
               </p>
             </div>
           </div>

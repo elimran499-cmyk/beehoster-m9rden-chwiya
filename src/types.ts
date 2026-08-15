@@ -28,7 +28,7 @@ export interface ChannelItem {
    *  the tile behind it needs to be light or dark. */
   logo?: string;
   logoTone?: 'dark' | 'light';
-  category: 'Sport' | 'Films' | 'VS/VK' | 'Europa' | 'Documentaires' | 'Kids' | '4K HDR';
+  category: 'Sport' | 'Films' | 'Nederland' | 'Documentaires' | 'Kids' | '4K HDR';
   quality: '4K Ultra HD' | 'FHD 60FPS' | 'FHD';
   flag: string;
   /** Short wordmark shown on the generated logo badge, e.g. "BBC", "ESPN". */
