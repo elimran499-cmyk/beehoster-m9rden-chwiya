@@ -3,21 +3,24 @@ import {ChevronDown, Search} from 'lucide-react';
 import type {ChannelCategory} from '../data/channelCategories';
 import {CATEGORY_GROUPS, CHANNEL_CATEGORIES, QUICK_FILTERS} from '../data/channelCategories';
 import {whatsAppLink} from '../data/contact';
+import {CHANNELS_PATH} from '../data/routes';
 
 /* ── Alle zenders ────────────────────────────────────────────────────────
-   Het volledige overzicht, één uitklapblok per categorie. Het staat direct
-   onder de prijzen: wie net een pakket heeft uitgezocht wil als volgende
-   weten of "zijn" zender erin zit, en die vraag wordt hier beantwoord.
+   Het volledige overzicht, één uitklapblok per categorie. Twee verschijnings-
+   vormen, één component:
 
-   De marquee bovenaan de pagina (ChannelExplorer) is de etalage — een paar
+   • `preview` — het blok op de homepage onder de prijzen. De eerste twaalf
+     categorieën, met een link door naar de eigen pagina.
+   • zonder `preview` — de pagina /zenders zelf. Alle 99 categorieën.
+
+   De marquee bovenaan de homepage (ChannelExplorer) is de etalage — een paar
    logo's die langsdrijven. Dit is de kaartenbak: doorzoekbaar, filterbaar en
    compleet. ───────────────────────────────────────────────────────────── */
 
 /* Negenennegentig dichtgeklapte blokken zijn samen bijna twaalfduizend
-   pixels — een muur waar iedereen die gewoon doorscrollt doorheen moet. De
-   lijst begint daarom bij de eerste twaalf; zoeken en filteren tonen altijd
-   alles wat matcht, want dan is scrollen juist het punt niet. */
-const INITIAL_VISIBLE = 12;
+   pixels — een muur waar iedereen die de homepage gewoon doorscrollt
+   doorheen moet. Daar staan de eerste twaalf; de rest woont op /zenders. */
+const PREVIEW_VISIBLE = 12;
 
 /** De cijfers boven de lijst — dezelfde claims als de rest van de site. */
 const STATS = [
@@ -31,8 +34,6 @@ const STATS = [
 type FilteredCategory = ChannelCategory & {
   /** De zenders die na het filteren overblijven. */
   matches: string[];
-  /** Klapt vanzelf open omdat de zoekopdracht zenders híerin raakte. */
-  autoOpen: boolean;
 };
 
 /** Eén zender in het opengeklapte raster. */
@@ -45,11 +46,26 @@ const ChannelPill: React.FC<{name: string}> = ({name}) => (
   </div>
 );
 
-export const ChannelList: React.FC = () => {
+export const ChannelList: React.FC<{
+  /** Homepage-variant: eerste twaalf categorieën en een link naar /zenders. */
+  preview?: boolean;
+}> = ({preview = false}) => {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [open, setOpen] = useState<Set<string>>(() => new Set<string>());
-  const [showAll, setShowAll] = useState(false);
+
+  /* Elke wijziging aan het filter begint met een schone lei. Zonder die
+     reset zou een blok dat je zelf had opengeklikt na het zoeken juist
+     dichtklappen — zie de XOR bij `isOpen` verderop. */
+  const changeQuery = (value: string) => {
+    setQuery(value);
+    setOpen(new Set<string>());
+  };
+
+  const changeCategory = (value: string | null) => {
+    setCategory(value);
+    setOpen(new Set<string>());
+  };
 
   const toggle = (name: string) =>
     setOpen((prev) => {
@@ -60,34 +76,42 @@ export const ChannelList: React.FC = () => {
     });
 
   const needle = query.trim().toLowerCase();
+  const filtering = needle !== '' || category !== null;
 
   /* Zoeken werkt op twee niveaus: een categorie blijft staan als haar naam
      matcht óf als één van haar zenders matcht, en binnen een open blok
      worden alleen de matchende zenders getoond. Een categorie waar niets
-     van overblijft valt helemaal weg. */
+     van overblijft valt helemaal weg. Zo vindt "ziggo" zijn zenders zonder
+     dat je hoeft te weten dat ze onder Nederland staan. */
   const visible = useMemo<FilteredCategory[]>(() => {
     return CHANNEL_CATEGORIES.map<FilteredCategory | null>((cat) => {
       if (category && cat.name !== category) return null;
-      if (!needle) return {...cat, matches: cat.channels, autoOpen: false};
+      if (!needle) return {...cat, matches: cat.channels};
 
       const nameHit = cat.name.toLowerCase().includes(needle);
       const matches = cat.channels.filter((ch) => ch.toLowerCase().includes(needle));
       if (!nameHit && matches.length === 0) return null;
 
-      /* Matcht de categorienaam zelf, dan hoort het hele pakket erbij — en
-         dan blijft het blok dicht, want dat zijn er al gauw tweehonderd.
-         Kwam de match van de zenders zelf, dan gaat het blok vanzelf open:
-         wie "ziggo" typt wil die zenders zien, niet nog een klik. */
-      return {...cat, matches: nameHit ? cat.channels : matches, autoOpen: !nameHit};
+      /* Matcht de categorienaam zelf, dan hoort het hele pakket erbij. */
+      return {...cat, matches: nameHit ? cat.channels : matches};
     }).filter((cat): cat is FilteredCategory => cat !== null);
   }, [needle, category]);
 
-  const filtering = needle !== '' || category !== null;
-  const shown = filtering || showAll ? visible : visible.slice(0, INITIAL_VISIBLE);
+  const capped = preview && !filtering;
+  const shown = capped ? visible.slice(0, PREVIEW_VISIBLE) : visible;
   const hidden = visible.length - shown.length;
 
+  const Heading = preview ? 'h2' : 'h1';
+
+  /* De ankers wijzen naar secties van de homepage. Vanaf /zenders moeten ze
+     daar eerst naartoe. */
+  const home = preview ? '' : '/';
+
   return (
-    <section id="channel-list" className="relative z-10 py-24 border-t border-line overflow-hidden">
+    <section
+      id="channel-list"
+      className={`relative z-10 overflow-hidden ${preview ? 'py-24 border-t border-line' : 'pt-28 sm:pt-36 pb-24'}`}
+    >
 
       {/* Zelfde warme velden als de rest van de pagina, zodat de lijst niet
           als een losse tabel op de achtergrond ligt */}
@@ -101,12 +125,12 @@ export const ChannelList: React.FC = () => {
           <span className="inline-block whitespace-nowrap text-[9px] sm:text-[11px] font-bold text-accent-deep uppercase tracking-[0.16em] sm:tracking-[0.25em] bg-paper backdrop-blur-md px-3 sm:px-4 py-1.5 rounded-full border border-line">
             {CHANNEL_CATEGORIES.length} categorieën • Zoek je eigen zender
           </span>
-          <h2 className="mt-4 sm:mt-5 font-display text-4xl sm:text-6xl md:text-7xl text-ink leading-[1.04]">
+          <Heading className="mt-4 sm:mt-5 font-display text-4xl sm:text-6xl md:text-7xl text-ink leading-[1.04]">
             De volledige <span className="accent-gradient-text">zenderlijst</span>
-          </h2>
+          </Heading>
           <p className="mt-3 sm:mt-4 text-[13px] sm:text-base text-muted px-2">
             Bekijk ons uitgebreide aanbod van <span className="font-semibold text-ink">80.000+</span> zenders uit meer
-            dan 70 landen. Hieronder vind je een selectie van onze populairste kanalen.
+            dan 70 landen. Zoek op de naam van je zender, of tik een land aan — de zenders staan er meteen onder.
           </p>
         </div>
 
@@ -122,7 +146,7 @@ export const ChannelList: React.FC = () => {
               <input
                 type="search"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => changeQuery(e.target.value)}
                 placeholder="Zoek zenders…"
                 aria-label="Zoek zenders"
                 className="w-full pl-12 pr-4 py-3 bg-surface border border-line rounded-xl text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/50 transition-all"
@@ -131,7 +155,7 @@ export const ChannelList: React.FC = () => {
 
             <select
               value={category ?? ''}
-              onChange={(e) => setCategory(e.target.value || null)}
+              onChange={(e) => changeCategory(e.target.value || null)}
               aria-label="Filter op categorie"
               className="px-4 py-3 bg-surface border border-line rounded-xl text-ink cursor-pointer min-w-[200px] focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/50 transition-all"
             >
@@ -162,7 +186,7 @@ export const ChannelList: React.FC = () => {
                   <button
                     key={cat.name}
                     type="button"
-                    onClick={() => setCategory(active ? null : cat.name)}
+                    onClick={() => changeCategory(active ? null : cat.name)}
                     aria-pressed={active}
                     className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                       active
@@ -192,9 +216,12 @@ export const ChannelList: React.FC = () => {
         {/* De lijst zelf */}
         <div className="space-y-4">
           {shown.map((cat) => {
-            /* XOR: een blok dat de zoekopdracht heeft opengezet gaat met
-               één klik weer dicht, en andersom. */
-            const isOpen = open.has(cat.name) !== cat.autoOpen;
+            /* Zodra er gefilterd wordt staan de blokken open. Wie op 🇳🇱
+               Nederland tikt wil die 174 zenders zien, niet nog een balk om
+               op te klikken. De XOR laat één klik dat alsnog dichtdoen — en
+               `changeQuery`/`changeCategory` wissen `open` weer, zodat een
+               volgende zoekopdracht schoon begint. */
+            const isOpen = open.has(cat.name) !== filtering;
             const panelId = `channels-${cat.name.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`;
             return (
               <div key={cat.name} className="list-card rounded-2xl overflow-hidden">
@@ -252,25 +279,19 @@ export const ChannelList: React.FC = () => {
           )}
         </div>
 
-        {/* Meer / minder — alleen als er iets te verbergen valt */}
-        {(hidden > 0 || showAll) && !filtering && (
+        {/* Door naar de volledige pagina — alleen op de homepage, en alleen
+            zolang er iets achter de hand blijft */}
+        {hidden > 0 && (
           <div className="mt-8 text-center">
-            <button
-              type="button"
-              onClick={() => setShowAll((prev) => !prev)}
-              aria-expanded={showAll}
+            <a
+              href={CHANNELS_PATH}
               className="inline-flex items-center gap-2 bg-surface border border-line text-ink font-bold px-7 py-3.5 rounded-full hover:border-accent/45 transition-colors"
             >
-              {showAll ? 'Toon minder' : `Toon alle ${visible.length} categorieën`}
-              <ChevronDown
-                className={`w-4 h-4 text-ink/40 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
-                aria-hidden="true"
-              />
-            </button>
+              Bekijk alle {visible.length} categorieën
+              <ChevronDown className="w-4 h-4 -rotate-90 text-ink/40" aria-hidden="true" />
+            </a>
             <p className="mt-3 text-xs text-muted">
-              {showAll
-                ? 'Of zoek hierboven direct op de naam van je zender.'
-                : `Nog ${hidden} categorieën — of zoek hierboven direct op de naam van je zender.`}
+              Nog {hidden} categorieën — of zoek hierboven direct op de naam van je zender.
             </p>
           </div>
         )}
@@ -283,7 +304,7 @@ export const ChannelList: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <a
-              href="#pricing"
+              href={`${home}#pricing`}
               className="inline-flex items-center gap-2 accent-button-gradient font-bold px-8 py-4 rounded-full glow-accent hover:scale-[1.03] transition-transform"
             >
               Bekijk pakketten

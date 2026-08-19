@@ -3,15 +3,20 @@ import { Menu, X, Sparkles } from 'lucide-react';
 import { BeehosterLogo } from './BeehosterLogo';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ORDER_MESSAGE, whatsAppLink } from '../data/contact';
+import { CHANNELS_PATH } from '../data/routes';
 
-const navLinks = [
-  { name: 'Start', href: '#hero', id: 'hero' },
-  { name: 'Zenders', href: '#channels', id: 'channels' },
-  { name: 'Prijzen', href: '#pricing', id: 'pricing' },
-  { name: 'Zenderlijst', href: '#channel-list', id: 'channel-list' },
-  { name: 'Voordelen', href: '#features', id: 'features' },
-  { name: 'Blog', href: '#blog', id: 'blog' },
-  { name: 'FAQ', href: '#faq', id: 'faq' },
+/* `href` is een anker in de homepage tenzij er een `path` bij staat; dat
+   laatste is een echte pagina en blijft overal hetzelfde. Vanaf een andere
+   pagina dan de home krijgen de ankers er een `/` voor, anders wijzen ze
+   naar een sectie die daar niet bestaat. */
+const navLinks: { name: string; hash: string; id: string; path?: string }[] = [
+  { name: 'Start', hash: '#hero', id: 'hero' },
+  { name: 'Zenders', hash: '#channels', id: 'channels' },
+  { name: 'Prijzen', hash: '#pricing', id: 'pricing' },
+  { name: 'Zenderlijst', hash: '#channel-list', id: 'channel-list', path: CHANNELS_PATH },
+  { name: 'Voordelen', hash: '#features', id: 'features' },
+  { name: 'Blog', hash: '#blog', id: 'blog' },
+  { name: 'FAQ', hash: '#faq', id: 'faq' },
 ];
 
 const Wordmark: React.FC<{ className?: string }> = ({ className = 'text-lg' }) => (
@@ -24,8 +29,19 @@ const Wordmark: React.FC<{ className?: string }> = ({ className = 'text-lg' }) =
    right. It rides transparent over the top of the hero and picks up its
    frosted plate once you start scrolling, so the masthead isn't fighting a
    solid bar on first paint. Phones get the same links in a drawer. */
-export const Navbar: React.FC = () => {
-  const [activeId, setActiveId] = useState<string>('hero');
+export const Navbar: React.FC<{
+  /** Welke pagina de balk draagt — bepaalt waar de ankers heen wijzen. */
+  page?: 'home' | 'channels';
+}> = ({page = 'home'}) => {
+  const onHome = page === 'home';
+  const hrefFor = (link: (typeof navLinks)[number]) => {
+    if (onHome) return link.hash;
+    /* De pagina waar we al zijn: het anker volstaat, geen herlading. */
+    if (link.path === CHANNELS_PATH) return link.hash;
+    return link.path ?? `/${link.hash}`;
+  };
+
+  const [activeId, setActiveId] = useState<string>(onHome ? 'hero' : 'channel-list');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -36,8 +52,11 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  /* Scroll spy — whichever section owns the most of the viewport wins. */
+  /* Scroll spy — whichever section owns the most of the viewport wins. Een
+     losse pagina heeft die secties niet; daar staat de actieve link vast. */
   useEffect(() => {
+    if (!onHome) return;
+
     const sections = navLinks
       .map((link) => document.getElementById(link.id))
       .filter((el): el is HTMLElement => el !== null);
@@ -56,7 +75,7 @@ export const Navbar: React.FC = () => {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [onHome]);
 
   /* An open drawer covers the page, so the page behind it shouldn't scroll —
      and Escape should close it the same way tapping a link does. */
@@ -89,7 +108,7 @@ export const Navbar: React.FC = () => {
         <div className="h-16 lg:h-[4.5rem] flex items-center justify-between gap-4">
 
           {/* Brand */}
-          <a href="#hero" className="flex items-center gap-2.5 shrink-0" aria-label="BEEHOSTER startpagina">
+          <a href={onHome ? '#hero' : '/'} className="flex items-center gap-2.5 shrink-0" aria-label="BEEHOSTER startpagina">
             <BeehosterLogo className="w-9 h-9 lg:w-10 lg:h-10 shrink-0" />
             <Wordmark className="text-base lg:text-lg" />
           </a>
@@ -102,7 +121,7 @@ export const Navbar: React.FC = () => {
               return (
                 <a
                   key={link.name}
-                  href={link.href}
+                  href={hrefFor(link)}
                   aria-current={active ? 'true' : undefined}
                   className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                     active ? 'text-ink' : 'text-muted hover:text-ink'
@@ -169,7 +188,7 @@ export const Navbar: React.FC = () => {
             return (
               <a
                 key={link.name}
-                href={link.href}
+                href={hrefFor(link)}
                 onClick={() => setMenuOpen(false)}
                 aria-current={active ? 'true' : undefined}
                 className={`flex items-center justify-between px-4 py-3 rounded-2xl text-[15px] font-semibold transition-colors ${

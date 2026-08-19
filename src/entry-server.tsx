@@ -1,17 +1,17 @@
 import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
-import App from './App';
+import {pageFor} from './routes';
 
 /**
- * Build-time entry. `scripts/prerender.mjs` calls this to bake the homepage
- * markup into dist/index.html, so a crawler gets the copy, the headings and
- * the poster wall without having to run the bundle first. The client
- * rehydrates that markup instead of discarding it.
+ * Build-time entry. `scripts/prerender.mjs` calls this once per pad en bakt
+ * de markup in de bijbehorende HTML, zodat een crawler de tekst, de koppen
+ * en de posterwand krijgt zonder eerst de bundel te draaien. De client
+ * hydrateert die markup in plaats van hem weg te gooien.
  */
-export function render(): string {
+export function render(pathname = '/'): string {
   return renderToString(
     <StrictMode>
-      <App />
+      {pageFor(pathname)}
     </StrictMode>,
   );
 }

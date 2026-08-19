@@ -3,6 +3,7 @@ import { ShieldCheck, Lock, ArrowUp, Heart, BadgeCheck } from 'lucide-react';
 import { BeehosterLogo } from './BeehosterLogo';
 import { WHATSAPP_DISPLAY, whatsAppLink } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { CHANNELS_PATH } from '../data/routes';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -18,7 +19,7 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <a href="#hero" className="flex items-center gap-3">
+            <a href="/#hero" className="flex items-center gap-3">
               <BeehosterLogo className="w-10 h-10 shrink-0" />
               <span className="text-2xl font-black text-ink"><span className="text-accent">BEE</span>HOSTER</span>
             </a>
@@ -62,13 +63,13 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-sm font-bold text-ink uppercase tracking-wider mb-4">Snelle links</h4>
             <ul className="space-y-2.5 text-xs">
-              <li><a href="#hero" className="hover:text-accent-deep transition-colors">Start</a></li>
-              <li><a href="#channels" className="hover:text-accent-deep transition-colors">Zenders & VOD</a></li>
-              <li><a href="#features" className="hover:text-accent-deep transition-colors">Waarom BEEHOSTER</a></li>
-              <li><a href="#pricing" className="hover:text-accent-deep transition-colors">Abonnementen</a></li>
-              <li><a href="#channel-list" className="hover:text-accent-deep transition-colors">Volledige zenderlijst</a></li>
-              <li><a href="#blog" className="hover:text-accent-deep transition-colors">Blog</a></li>
-              <li><a href="#faq" className="hover:text-accent-deep transition-colors">FAQ & support</a></li>
+              <li><a href="/#hero" className="hover:text-accent-deep transition-colors">Start</a></li>
+              <li><a href="/#channels" className="hover:text-accent-deep transition-colors">Zenders & VOD</a></li>
+              <li><a href="/#features" className="hover:text-accent-deep transition-colors">Waarom BEEHOSTER</a></li>
+              <li><a href="/#pricing" className="hover:text-accent-deep transition-colors">Abonnementen</a></li>
+              <li><a href={CHANNELS_PATH} className="hover:text-accent-deep transition-colors">Volledige zenderlijst</a></li>
+              <li><a href="/#blog" className="hover:text-accent-deep transition-colors">Blog</a></li>
+              <li><a href="/#faq" className="hover:text-accent-deep transition-colors">FAQ & support</a></li>
             </ul>
           </div>
 

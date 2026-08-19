@@ -1,6 +1,6 @@
 import {StrictMode} from 'react';
 import {createRoot, hydrateRoot} from 'react-dom/client';
-import App from './App.tsx';
+import {pageFor} from './routes.tsx';
 import './index.css';
 import {trackConversions} from './conversions';
 
@@ -10,7 +10,7 @@ trackConversions();
 const container = document.getElementById('root')!;
 const app = (
   <StrictMode>
-    <App />
+    {pageFor(window.location.pathname)}
   </StrictMode>
 );
 

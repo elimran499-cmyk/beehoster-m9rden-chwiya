@@ -10,8 +10,7 @@ import { Testimonials } from './components/Testimonials';
 import { Blog } from './components/Blog';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { WhatsAppIcon } from './components/WhatsAppIcon';
-import { WHATSAPP_DISPLAY, whatsAppLink } from './data/contact';
+import { WhatsAppFab } from './components/WhatsAppFab';
 
 export default function App() {
   return (
@@ -37,10 +36,11 @@ export default function App() {
         {/* Subscription Pricing Plans */}
         <Pricing />
 
-        {/* The full channel list — the question that follows "which pack?" is
-            "is my channel in it?", so the searchable catalogue sits directly
-            under the prices */}
-        <ChannelList />
+        {/* The channel list — the question that follows "which pack?" is "is
+            my channel in it?", so the searchable catalogue sits directly
+            under the prices. The first twelve categories live here; the full
+            99 have their own page at /zenders. */}
+        <ChannelList preview />
 
         {/* 3x2 Bento Key Features Grid */}
         <Features />
@@ -60,18 +60,7 @@ export default function App() {
 
       {/* Floating WhatsApp contact — on every screen now that the phone dock
           which used to carry it is gone */}
-      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:left-6 sm:right-auto z-40">
-        <a
-          href={whatsAppLink('Hoi BEEHOSTER! Ik wil graag meer weten over jullie IPTV-abonnementen.')}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Neem contact op via WhatsApp: ${WHATSAPP_DISPLAY}`}
-          className="p-3.5 rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/35 hover:scale-110 transition-transform duration-300 flex items-center justify-center border border-white/40"
-          title={`WhatsApp-support 24/7 — ${WHATSAPP_DISPLAY}`}
-        >
-          <WhatsAppIcon className="w-6 h-6" />
-        </a>
-      </div>
+      <WhatsAppFab />
 
     </div>
   );
