@@ -30,18 +30,38 @@ const STATS = [
   {value: '99,9%', label: 'Uptime'},
 ];
 
-/** Een categorie zoals de lijst hem toont: gefilterd op de zoekopdracht. */
-type FilteredCategory = ChannelCategory & {
-  /** De zenders die na het filteren overblijven. */
-  matches: string[];
-};
+/* Zoeken op "hd" raakt zowat elke zender in de lijst. Meer dan een paar
+   honderd resultaten leest niemand door; wie zijn zender daar niet tussen
+   ziet typt beter een letter extra dan dat hij vijfduizend kaartjes scrolt. */
+const MAX_RESULTS = 300;
 
-/** Eén zender in het opengeklapte raster. */
+/** Eén zender die aan de zoekopdracht voldoet, mét waar hij vandaan komt. */
+type ChannelHit = {channel: string; category: ChannelCategory};
+
+/** Eén zender in het opengeklapte raster van een categorie. */
 const ChannelPill: React.FC<{name: string}> = ({name}) => (
   <div className="flex items-center gap-2 px-3 py-2 bg-paper/70 rounded-lg border border-line hover:bg-accent-soft hover:border-accent/25 transition-colors">
     <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
     <span className="text-sm font-medium text-ink/80 truncate" title={name}>
       {name}
+    </span>
+  </div>
+);
+
+/* Een zoekresultaat draagt zijn categorie mee. Zonder dat label is "Sport 1"
+   een naam zonder land, en juist dat land is waar de vraag meestal over
+   gaat. */
+const ChannelHitPill: React.FC<{hit: ChannelHit}> = ({hit}) => (
+  <div className="flex items-center gap-2.5 px-3 py-2.5 bg-paper/70 rounded-lg border border-line hover:bg-accent-soft hover:border-accent/25 transition-colors">
+    <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
+    <span className="min-w-0">
+      <span className="block text-sm font-medium text-ink/85 truncate" title={hit.channel}>
+        {hit.channel}
+      </span>
+      <span className="flex items-center gap-1.5 text-[11px] text-muted">
+        <span aria-hidden="true">{hit.category.icon}</span>
+        <span className="truncate">{hit.category.name}</span>
+      </span>
     </span>
   </div>
 );
@@ -76,28 +96,39 @@ export const ChannelList: React.FC<{
     });
 
   const needle = query.trim().toLowerCase();
-  const filtering = needle !== '' || category !== null;
+  const searching = needle !== '';
 
-  /* Zoeken werkt op twee niveaus: een categorie blijft staan als haar naam
-     matcht óf als één van haar zenders matcht, en binnen een open blok
-     worden alleen de matchende zenders getoond. Een categorie waar niets
-     van overblijft valt helemaal weg. Zo vindt "ziggo" zijn zenders zonder
-     dat je hoeft te weten dat ze onder Nederland staan. */
-  const visible = useMemo<FilteredCategory[]>(() => {
-    return CHANNEL_CATEGORIES.map<FilteredCategory | null>((cat) => {
-      if (category && cat.name !== category) return null;
-      if (!needle) return {...cat, matches: cat.channels};
+  /* Zoeken levert zenders op, geen landen. Wie "eurosport" typt wil de
+     zenders zien — niet zeventien landen waar hij er één voor één in moet
+     klikken om te zien of die van hem ertussen staat. Elk resultaat draagt
+     zijn land als label, dus de indeling gaat niet verloren; ze staat alleen
+     niet meer in de weg.
 
+     Matcht de categorienaam zelf ("kinderen", "sport"), dan telt het hele
+     pakket mee — dat is precies waar je dan om vroeg. */
+  const hits = useMemo<ChannelHit[]>(() => {
+    if (!searching) return [];
+
+    const found: ChannelHit[] = [];
+    for (const cat of CHANNEL_CATEGORIES) {
+      if (category && cat.name !== category) continue;
       const nameHit = cat.name.toLowerCase().includes(needle);
-      const matches = cat.channels.filter((ch) => ch.toLowerCase().includes(needle));
-      if (!nameHit && matches.length === 0) return null;
+      for (const channel of cat.channels) {
+        if (nameHit || channel.toLowerCase().includes(needle)) found.push({channel, category: cat});
+      }
+    }
+    return found;
+  }, [needle, category, searching]);
 
-      /* Matcht de categorienaam zelf, dan hoort het hele pakket erbij. */
-      return {...cat, matches: nameHit ? cat.channels : matches};
-    }).filter((cat): cat is FilteredCategory => cat !== null);
-  }, [needle, category]);
+  /* Zonder zoekopdracht blijft het een bladerbare index: één blok per
+     categorie, eventueel teruggebracht tot het aangetikte land. */
+  const visible = useMemo(
+    () => (category ? CHANNEL_CATEGORIES.filter((cat) => cat.name === category) : CHANNEL_CATEGORIES),
+    [category],
+  );
 
-  const capped = preview && !filtering;
+  const shownHits = hits.slice(0, MAX_RESULTS);
+  const capped = preview && !category;
   const shown = capped ? visible.slice(0, PREVIEW_VISIBLE) : visible;
   const hidden = visible.length - shown.length;
 
@@ -213,15 +244,48 @@ export const ChannelList: React.FC<{
           ))}
         </div>
 
-        {/* De lijst zelf */}
-        <div className="space-y-4">
+        {/* Zoekresultaten — de zenders zelf, op één hoop, met hun land
+            eronder. Geen uitklapblokken: je zocht een zender, dus je krijgt
+            zenders. */}
+        {searching && hits.length > 0 && (
+          <div>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-4">
+              <p className="font-display text-2xl sm:text-3xl text-ink">
+                {hits.length} {hits.length === 1 ? 'zender' : 'zenders'} gevonden
+              </p>
+              {hits.length > shownHits.length && (
+                <p className="text-xs text-muted">
+                  Eerste {MAX_RESULTS} getoond — typ een letter extra om te verfijnen
+                </p>
+              )}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {shownHits.map((hit, i) => (
+                <ChannelHitPill key={`${hit.category.name}-${hit.channel}-${i}`} hit={hit} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {searching && hits.length === 0 && (
+          <div className="glass-card rounded-2xl p-10 text-center">
+            <p className="font-display text-2xl text-ink">Niets gevonden voor “{query}”</p>
+            <p className="mt-2 text-sm text-muted">
+              Staat je zender er niet tussen? Vraag het even via WhatsApp — de kans is groot dat we hem gewoon
+              hebben.
+            </p>
+          </div>
+        )}
+
+        {/* De bladerbare index — alleen als er niet gezocht wordt */}
+        <div className={`space-y-4 ${searching ? 'hidden' : ''}`}>
           {shown.map((cat) => {
-            /* Zodra er gefilterd wordt staan de blokken open. Wie op 🇳🇱
-               Nederland tikt wil die 174 zenders zien, niet nog een balk om
-               op te klikken. De XOR laat één klik dat alsnog dichtdoen — en
-               `changeQuery`/`changeCategory` wissen `open` weer, zodat een
-               volgende zoekopdracht schoon begint. */
-            const isOpen = open.has(cat.name) !== filtering;
+            /* Een aangetikt land staat meteen open. Wie op 🇳🇱 Nederland
+               tikt wil die 174 zenders zien, niet nog een balk om op te
+               klikken. De XOR laat één klik dat alsnog dichtdoen — en
+               `changeCategory` wist `open` weer, zodat het volgende land
+               schoon begint. */
+            const isOpen = open.has(cat.name) !== (category !== null);
             const panelId = `channels-${cat.name.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`;
             return (
               <div key={cat.name} className="list-card rounded-2xl overflow-hidden">
@@ -238,9 +302,9 @@ export const ChannelList: React.FC<{
                   <h3 className="font-display text-xl sm:text-2xl lg:text-3xl text-ink truncate">{cat.name}</h3>
                   <span className="ml-auto flex items-center gap-1 sm:gap-3 shrink-0">
                     <span className="bg-accent-soft border border-accent/25 text-accent-deep text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 rounded-full whitespace-nowrap">
-                      {cat.matches.length}
+                      {cat.channels.length}
                       <span className="hidden sm:inline">
-                        {cat.matches.length === 1 ? ' zender' : ' zenders'}
+                        {cat.channels.length === 1 ? ' zender' : ' zenders'}
                       </span>
                     </span>
                     <ChevronDown
@@ -258,7 +322,7 @@ export const ChannelList: React.FC<{
                 {isOpen && (
                   <div id={panelId} className="px-5 lg:px-6 pb-5 lg:pb-6 pt-2">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                      {cat.matches.map((channel, i) => (
+                      {cat.channels.map((channel, i) => (
                         <ChannelPill key={`${channel}-${i}`} name={channel} />
                       ))}
                     </div>
@@ -267,21 +331,11 @@ export const ChannelList: React.FC<{
               </div>
             );
           })}
-
-          {visible.length === 0 && (
-            <div className="glass-card rounded-2xl p-10 text-center">
-              <p className="font-display text-2xl text-ink">Niets gevonden voor “{query}”</p>
-              <p className="mt-2 text-sm text-muted">
-                Staat je zender er niet tussen? Vraag het even via WhatsApp — de kans is groot dat we hem gewoon
-                hebben.
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Door naar de volledige pagina — alleen op de homepage, en alleen
             zolang er iets achter de hand blijft */}
-        {hidden > 0 && (
+        {hidden > 0 && !searching && (
           <div className="mt-8 text-center">
             <a
               href={CHANNELS_PATH}
