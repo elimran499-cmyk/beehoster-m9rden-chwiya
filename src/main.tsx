@@ -2,6 +2,10 @@ import {StrictMode} from 'react';
 import {createRoot, hydrateRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import {trackConversions} from './conversions';
+
+// Counts WhatsApp and order CTA clicks as Google Ads conversions.
+trackConversions();
 
 const container = document.getElementById('root')!;
 const app = (

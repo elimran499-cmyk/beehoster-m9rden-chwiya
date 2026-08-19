@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { trackWhatsAppClicks } from './analytics';
+import React from 'react';
 import { AmbientLights } from './components/AmbientLights';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -14,9 +13,6 @@ import { WhatsAppIcon } from './components/WhatsAppIcon';
 import { WHATSAPP_DISPLAY, whatsAppLink } from './data/contact';
 
 export default function App() {
-  // One delegated listener covers every WhatsApp CTA on the page.
-  useEffect(trackWhatsAppClicks, []);
-
   return (
     <div className="relative min-h-screen bg-page text-ink flex flex-col font-sans">
 

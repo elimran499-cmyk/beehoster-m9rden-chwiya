@@ -228,6 +228,7 @@ export const Pricing: React.FC = () => {
 
                 {/* CTA */}
                 <a
+                  data-cta="order"
                   href={whatsAppLink(orderMessage(pack.label, price))}
                   target="_blank"
                   rel="noopener noreferrer"

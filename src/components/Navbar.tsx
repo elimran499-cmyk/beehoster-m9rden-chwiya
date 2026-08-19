@@ -131,6 +131,7 @@ export const Navbar: React.FC = () => {
             </a>
 
             <a
+              data-cta="order"
               href={whatsAppLink(ORDER_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
@@ -182,6 +183,7 @@ export const Navbar: React.FC = () => {
 
           <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
             <a
+              data-cta="order"
               href={whatsAppLink(ORDER_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
