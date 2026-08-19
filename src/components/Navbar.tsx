@@ -34,11 +34,15 @@ export const Navbar: React.FC<{
   page?: 'home' | 'channels';
 }> = ({page = 'home'}) => {
   const onHome = page === 'home';
+  const currentPath = onHome ? '/' : CHANNELS_PATH;
+
+  /* Heeft een link een eigen pagina, dan gaat hij daarheen — ook vanaf de
+     homepage. "Zenderlijst" hoort de volledige lijst te openen, niet een
+     stukje verderop op dezelfde pagina te scrollen. Sta je er al, dan is het
+     anker genoeg en blijft de pagina staan. */
   const hrefFor = (link: (typeof navLinks)[number]) => {
-    if (onHome) return link.hash;
-    /* De pagina waar we al zijn: het anker volstaat, geen herlading. */
-    if (link.path === CHANNELS_PATH) return link.hash;
-    return link.path ?? `/${link.hash}`;
+    if (link.path) return link.path === currentPath ? link.hash : link.path;
+    return onHome ? link.hash : `/${link.hash}`;
   };
 
   const [activeId, setActiveId] = useState<string>(onHome ? 'hero' : 'channel-list');
