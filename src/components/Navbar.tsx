@@ -8,6 +8,7 @@ const navLinks = [
   { name: 'Start', href: '#hero', id: 'hero' },
   { name: 'Zenders', href: '#channels', id: 'channels' },
   { name: 'Prijzen', href: '#pricing', id: 'pricing' },
+  { name: 'Zenderlijst', href: '#channel-list', id: 'channel-list' },
   { name: 'Voordelen', href: '#features', id: 'features' },
   { name: 'Blog', href: '#blog', id: 'blog' },
   { name: 'FAQ', href: '#faq', id: 'faq' },

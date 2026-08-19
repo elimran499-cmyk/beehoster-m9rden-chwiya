@@ -66,6 +66,7 @@ export const Footer: React.FC = () => {
               <li><a href="#channels" className="hover:text-accent-deep transition-colors">Zenders & VOD</a></li>
               <li><a href="#features" className="hover:text-accent-deep transition-colors">Waarom BEEHOSTER</a></li>
               <li><a href="#pricing" className="hover:text-accent-deep transition-colors">Abonnementen</a></li>
+              <li><a href="#channel-list" className="hover:text-accent-deep transition-colors">Volledige zenderlijst</a></li>
               <li><a href="#blog" className="hover:text-accent-deep transition-colors">Blog</a></li>
               <li><a href="#faq" className="hover:text-accent-deep transition-colors">FAQ & support</a></li>
             </ul>

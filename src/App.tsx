@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { ChannelExplorer } from './components/ChannelExplorer';
 import { Features } from './components/Features';
 import { Pricing } from './components/Pricing';
+import { ChannelList } from './components/ChannelList';
 import { Testimonials } from './components/Testimonials';
 import { Blog } from './components/Blog';
 import { FaqSection } from './components/FaqSection';
@@ -35,6 +36,11 @@ export default function App() {
 
         {/* Subscription Pricing Plans */}
         <Pricing />
+
+        {/* The full channel list — the question that follows "which pack?" is
+            "is my channel in it?", so the searchable catalogue sits directly
+            under the prices */}
+        <ChannelList />
 
         {/* 3x2 Bento Key Features Grid */}
         <Features />
