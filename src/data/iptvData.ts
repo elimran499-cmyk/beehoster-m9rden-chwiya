@@ -235,7 +235,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: 'faq-0',
     category: 'Bestellen',
     question: 'Hoe bestel ik een abonnement?',
-    answer: 'Alles loopt via WhatsApp. Tik op een bestelknop op deze pagina en er opent een chat met ons op +44 7414 662070, met je gekozen pakket al in het bericht. Wij bevestigen de prijs, jij betaalt zoals het jou uitkomt en je login komt terug in dezelfde chat. Geen account aanmaken, geen bestelformulier invullen.'
+    answer: 'Alles loopt via WhatsApp. Tik op een bestelknop op deze pagina en er opent een chat met ons op +44 7832 486269, met je gekozen pakket al in het bericht. Wij bevestigen de prijs, jij betaalt zoals het jou uitkomt en je login komt terug in dezelfde chat. Geen account aanmaken, geen bestelformulier invullen.'
   },
   {
     id: 'faq-1',
