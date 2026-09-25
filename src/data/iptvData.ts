@@ -164,22 +164,22 @@ export const FEATURE_GRID = [
 ];
 
 export const SAMPLE_CHANNELS: ChannelItem[] = [
-  { id: '1', name: 'NPO 1 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO1', logo: '/logos/npo-1-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '2', name: 'NPO 2 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO2', logo: '/logos/npo-2-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '3', name: 'NPO 3 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO3', logo: '/logos/npo-3-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '4', name: 'RTL 4 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL4', logo: '/logos/rtl-4-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '5', name: 'RTL 5 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL5', logo: '/logos/rtl-5-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '6', name: 'RTL 7 HD', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL7', logo: '/logos/rtl-7-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '7', name: 'RTL 8 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL8', logo: '/logos/rtl-8-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '8', name: 'SBS6 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'SBS6', logo: '/logos/sbs6-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '9', name: 'Net5 HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NET5', logo: '/logos/net5-hd.jpg', logoTone: 'dark', epgAvailable: true },
-  { id: '10', name: 'Veronica HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VERO', logo: '/logos/veronica-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '11', name: 'RTL Z HD', category: 'Nederland', quality: 'FHD', flag: '🇳🇱', logoText: 'RTLZ', logo: '/logos/rtl-z-hd.png', logoTone: 'dark', epgAvailable: true },
-  { id: '12', name: 'Ziggo Sport Select 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ZIG', logo: '/logos/ziggo-sport-select-4k.png', logoTone: 'dark', epgAvailable: true },
-  { id: '13', name: 'ESPN 1 Eredivisie 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ESPN', logo: '/logos/espn-1-eredivisie-4k.png', logoTone: 'dark', epgAvailable: true },
-  { id: '14', name: 'Viaplay Nederland', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VP', logo: '/logos/viaplay-nederland.png', logoTone: 'dark', epgAvailable: true },
-  { id: '15', name: 'Discovery Channel NL', category: 'Documentaires', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'DISC', logo: '/logos/discovery-channel-nl.png', logoTone: 'dark', epgAvailable: true },
-  { id: '16', name: 'NPO Zapp', category: 'Kids', quality: 'FHD', flag: '🇳🇱', logoText: 'ZAPP', logo: '/logos/npo-zapp.png', logoTone: 'dark', epgAvailable: true },
+  { id: '1', name: 'NPO 1 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO1', logo: '/logos/npo-1-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '2', name: 'NPO 2 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO2', logo: '/logos/npo-2-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '3', name: 'NPO 3 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NPO3', logo: '/logos/npo-3-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '4', name: 'RTL 4 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL4', logo: '/logos/rtl-4-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '5', name: 'RTL 5 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL5', logo: '/logos/rtl-5-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '6', name: 'RTL 7 HD', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL7', logo: '/logos/rtl-7-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '7', name: 'RTL 8 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'RTL8', logo: '/logos/rtl-8-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '8', name: 'SBS6 HD', category: 'Nederland', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'SBS6', logo: '/logos/sbs6-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '9', name: 'Net5 HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'NET5', logo: '/logos/net5-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '10', name: 'Veronica HD', category: 'Films', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VERO', logo: '/logos/veronica-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '11', name: 'RTL Z HD', category: 'Nederland', quality: 'FHD', flag: '🇳🇱', logoText: 'RTLZ', logo: '/logos/rtl-z-hd.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '12', name: 'Ziggo Sport Select 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ZIG', logo: '/logos/ziggo-sport-select-4k.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '13', name: 'ESPN 1 Eredivisie 4K', category: '4K HDR', quality: '4K Ultra HD', flag: '🇳🇱', logoText: 'ESPN', logo: '/logos/espn-1-eredivisie-4k.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '14', name: 'Viaplay Nederland', category: 'Sport', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'VP', logo: '/logos/viaplay-nederland.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '15', name: 'Discovery Channel NL', category: 'Documentaires', quality: 'FHD 60FPS', flag: '🇳🇱', logoText: 'DISC', logo: '/logos/discovery-channel-nl.webp', logoTone: 'dark', epgAvailable: true },
+  { id: '16', name: 'NPO Zapp', category: 'Kids', quality: 'FHD', flag: '🇳🇱', logoText: 'ZAPP', logo: '/logos/npo-zapp.webp', logoTone: 'dark', epgAvailable: true },
 ];
 
 
@@ -235,7 +235,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: 'faq-0',
     category: 'Bestellen',
     question: 'Hoe bestel ik een abonnement?',
-    answer: 'Alles loopt via WhatsApp. Tik op een bestelknop op deze pagina en er opent een chat met ons op +44 7832 486269, met je gekozen pakket al in het bericht. Wij bevestigen de prijs, jij betaalt zoals het jou uitkomt en je login komt terug in dezelfde chat. Geen account aanmaken, geen bestelformulier invullen.'
+    answer: 'Alles loopt via WhatsApp. Tik op een bestelknop op deze pagina en er opent een chat met ons op +44 7414 662070, met je gekozen pakket al in het bericht. Wij bevestigen de prijs, jij betaalt zoals het jou uitkomt en je login komt terug in dezelfde chat. Geen account aanmaken, geen bestelformulier invullen.'
   },
   {
     id: 'faq-1',
